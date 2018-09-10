@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.util.Scanner;
+
 /**
  * @author cw222kq
  *
@@ -10,14 +12,18 @@ package view;
 public class Console {
 	
 	// tror denna måste vara i modellen
-	public boolean start = true;
+	private boolean start = true;
+	private Scanner scan;
+	private Scanner scanner;
+	private char inputResult;
+	private char inChar;
 
 	public Console() {
 		
 		
 	}
 	// print out main menu
-	public void printMainMenu(){
+	private void printMainMenu(){
 		// welcome messages who prints out when the user starts the program
 		// tror denna måste vara i modellen
 		if(start){
@@ -38,6 +44,36 @@ public class Console {
 		System.out.println("<9> CHANGE BOATS INFORMATION");
 		System.out.println("");
 		System.out.println("<Q> QUIT");
+	}
+	// Get the input value from the keyboard. Written with inspiration from: https://stackoverflow.com/questions/15446689/what-is-the-use-of-system-in-read
+	private char getUsersInput() {
+	    try {
+	      inChar = Character.toUpperCase((char)System.in.read());
+	      // don´t return value if value is enter or line feed
+	      while (inChar == '\r' || inChar =='\n') {
+	    	  inChar = Character.toUpperCase((char)System.in.read());
+		  }
+	      System.out.print("You entered ");
+	      System.out.println(inChar);
+		     
+	      return inChar;
+	    } 
+	    catch (java.io.IOException e) {
+	      System.out.println("inne i catchen");
+	      System.err.println("" + e);
+		      
+	      return 0;
+	    }
+	}
+	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
+	public void runMemberRegistration(){
+		printMainMenu();
+		while(getUsersInput() != 'Q'){
+			System.out.println("The user don´t want to quit");
+			printMainMenu();
+		}
+		System.out.println("You want to quit. Bye for now!!");
+		
 	}
 
 }
