@@ -22,6 +22,7 @@ public class Member {
 		this.name = valueName;
 		this.password = valuePassword;
 	}
+	public Member(){}
 	// setters (used when updating the information about the member)
 	// tror setId kan tas bort iom att vi aldrig sätter det själva
 	public void setSSN(String valueSSN){

@@ -20,7 +20,9 @@ public class ProgramMain {
 		// run while memberRegistration is true
 		view.Console v = new view.Console();
 		controller.MemberRegistration c = new controller.MemberRegistration();
-		c.runMemberRegistration(v);
+		model.Member m_m = new model.Member();
+		model.Boat m_b = new model.Boat();
+		c.runMemberRegistration(v, m_m, m_b);
 	}
 
 }

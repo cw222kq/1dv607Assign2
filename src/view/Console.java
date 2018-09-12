@@ -28,6 +28,13 @@ public class Console {
 	public char getInChar(){
 		return this.inChar;
 	}
+	public boolean wantsToQuit(){
+		return getUsersInputChar() == 'Q';
+	}
+	public void quit(){
+		System.out.println("Quitting the application!");
+		System.exit(0);
+	}
 	// print out main menu
 	public void printMainMenu(){
 		// welcome messages who prints out when the user starts the program
@@ -89,171 +96,134 @@ public class Console {
 		int inValue = scan.nextInt();
 		return inValue;
 	}
-	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
-	// running the program as long as the user don't choose q in the menu
-	/*public void runMemberRegistration(){
-		printMainMenu();
-		while(getUsersInputChar() != 'Q'){
-			if(inChar == '1'){
-				System.out.println("Användaren valde 1. Inne i första if satsen.");
-				printCreateNewMemberMenu();
-				inChar = '0';
-			}
-			if(inChar == '2'){
-				System.out.println("COMPACT LIST");
-				inChar = '0';
-			}
-			if(inChar == '3'){
-				System.out.println("VERBOSE LIST");
-				inChar = '0';
-			}
-			if(inChar == '4'){
-				printDeleteAMemberMenu();
-				inChar = '0';
-			}
-			if(inChar == '5'){
-				printChangeMembersInformationMenu();
-				inChar = '0';
-			}
-			if(inChar == '6'){
-				printLookAtMembersInformationMenu();
-				inChar = '0';
-			}
-			if(inChar == '7'){
-				printRegisterANewBoatMenu();
-				inChar = '0';
-			}
-			if(inChar == '8'){
-				printDeleteABoatMenu();
-				inChar = '0';
-			}
-			if(inChar == '9'){
-				printChangeBoatsInformationMenu();
-				inChar = '0';
-			}
-			System.out.println("The user don´t want to quit");
-			printMainMenu();
-		}
-		System.out.println("You want to quit. Bye for now!!");
-		System.exit(0);
-		
-	} TA BORT DENNA LIGGER I CONTROLLER ISTÄLLET NU*/
 	// ******** SUBMENUS TO THE MAIN MENU member ********
-	// create new member menu JOBBA HÄR!!!!!!!!!!!!!!!!!!!!!!!!!
-	public void printCreateNewMemberMenu(){
+	// create new member menu
+	public void printCreateNewMemberMenu(model.Member a_member){
 		System.out.println("CREATE NEW MEMBER");
 		System.out.println("MEMBERS INFORMATION");
 		System.out.println("Input members social security number(yymmddxxxx)");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 		System.out.println("Input members name(first and lastname)");
-		String name = getUsersInputStringTwoWords();
-		System.out.println("name: " + name);
+		a_member.setName(getUsersInputStringTwoWords());
+		System.out.println("name: " + a_member.getName());
 		
 		System.out.println("Input members password(no line feeds allowed)");
-		String password = getUsersInputStringOneWord();
-		System.out.println("password: " + password);
+		a_member.setPassword(getUsersInputStringOneWord());
+		System.out.println("password: " + a_member.getPassword());
 	}
 	// delete a member menu
-	public void printDeleteAMemberMenu(){
+	public void printDeleteAMemberMenu(model.Member a_member){
 		System.out.println("DELETE A MEMBER");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 	}
 	// change members information menu(only changes the information if the user input some new data, if the user only presses enter the old value remains)
-	public void printChangeMembersInformationMenu(){
+	public void printChangeMembersInformationMenu(model.Member a_member){
 		System.out.println("CHANGE MEMBERS INFORMATION");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to make some changes to");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 		//databasen hämtar ut och skriver ut attributen och dess nuvarande värden
 		// använd samma metod som för nedanstående metod
 		
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the new social security number(yymmddxxxx)");
-		String SSNNew = getUsersInputStringOneWord();
-		System.out.println("SSNNew: " + SSNNew);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 		System.out.println("Input the new name");
-		String name = getUsersInputStringTwoWords();
-		System.out.println("name: " + name);
+		a_member.setName(getUsersInputStringTwoWords());
+		System.out.println("name: " + a_member.getName());
 		
 		System.out.println("Input the new password");
-		String password = getUsersInputStringOneWord();
-		System.out.println("password: " + password);
+		a_member.setPassword(getUsersInputStringOneWord());
+		System.out.println("password: " + a_member.getPassword());
 		
 	}
 	// look at members information menu
-	public void printLookAtMembersInformationMenu(){
+	public void printLookAtMembersInformationMenu(model.Member a_member){
 		System.out.println("LOOK AT MEMBERS INFORMATION");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to look at");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 		
 	}
 	// ******** SUBMENUS TO THE MAIN MENU boat ********
 	// register a new boat
-	public void printRegisterANewBoatMenu(){
+	public void printRegisterANewBoatMenu(model.Member a_member, model.Boat a_boat){
 		System.out.println("REGISTER A NEW BOAT");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to register a new boat for");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		
 		System.out.println("Input the size of the boat");
-		int size = getUsersInputInteger();
-		System.out.println("size: " + size);
+		a_boat.setSize(getUsersInputInteger());
+		System.out.println("size: " + a_boat.getSize());
 		
 		System.out.println("Input the type of the boat");
-		String type = getUsersInputStringTwoWords();
-		System.out.println("type: " + type);
+		a_boat.setType(getUsersInputStringTwoWords());
+		System.out.println("type: " + a_boat.getType());
 		
 		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
-		String path = getUsersInputStringOneWord();
-		System.out.println("path: " + path);
+		a_boat.setPath(getUsersInputStringOneWord());
+		System.out.println("path: " + a_boat.getPath());
 		
 		
 	}
 	// delete a boat
-	public void printDeleteABoatMenu(){
+	public void printDeleteABoatMenu(model.Member a_member, model.Boat a_boat){
 		System.out.println("DELETE A BOAT");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete a boat from");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
 		// medlemmens personnummer och namn skrivs utsamt medlemmens alla båtar med tillhörande båtid
 		System.out.println("Input the id for the boat you with to delete");
-		int id = getUsersInputInteger();
-		System.out.println("id: " + id);
+		a_boat.setId(getUsersInputInteger());
+		System.out.println("id: " + a_boat.getId());
 		
 	}
 	// change boats information
-	public void printChangeBoatsInformationMenu(){
+	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
 		System.out.println("CHANGE BOATS INFORMATION");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to change a boats information from");
-		String SSN = getUsersInputStringOneWord();
-		System.out.println("SSN: " + SSN);
+		a_member.setSSN(getUsersInputStringOneWord());
+		System.out.println("SSN: " + a_member.getSSN());
+		
 		// medlemmens personnummer och namn skrivs ut samt medlemmens alla båtar med tillhörande båtid
 		System.out.println("Input the id for the boat you with to change");
-		int id = getUsersInputInteger();
-		System.out.println("id: " + id);
+		a_boat.setId(getUsersInputInteger());
+		System.out.println("id: " + a_boat.getId());
+		
 		//den valda båtens information skrivs ut
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the size of the boat");
-		int size = getUsersInputInteger();
-		System.out.println("size: " + size);
+		a_boat.setSize(getUsersInputInteger());
+		System.out.println("size: " + a_boat.getSize());
 		
 		System.out.println("Input the type of the boat");
-		String type = getUsersInputStringTwoWords();
-		System.out.println("type: " + type);
+		a_boat.setType(getUsersInputStringTwoWords());
+		System.out.println("type: " + a_boat.getType());
 		
 		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
-		String path = getUsersInputStringOneWord();
-		System.out.println("path: " + path);
+		a_boat.setPath(getUsersInputStringOneWord());
+		System.out.println("path: " + a_boat.getPath());
 		
 	}
+	// ******** MAIN MENU LIST MEMBERS COMPACT AND VERBOSE ********
+	// list member as compact list
+		public void printCompactList(){
+			System.out.println("COMPACT LIST");
+		}
+		// list member as verbose list
+		public void printVerboseList(){
+			System.out.println("VERBOSE LIST");
+		}
+		
 
 }
