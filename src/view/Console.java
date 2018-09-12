@@ -22,8 +22,14 @@ public class Console {
 		
 		
 	}
+	public void emptyInChar(){
+		this.inChar = '0';
+	}
+	public char getInChar(){
+		return this.inChar;
+	}
 	// print out main menu
-	private void printMainMenu(){
+	public void printMainMenu(){
 		// welcome messages who prints out when the user starts the program
 		// tror denna måste vara i modellen
 		if(start){
@@ -46,7 +52,7 @@ public class Console {
 		System.out.println("<Q> QUIT");
 	}
 	// Get the input value from the keyboard. Written with inspiration from: https://stackoverflow.com/questions/15446689/what-is-the-use-of-system-in-read
-	private char getUsersInputChar() {
+	public char getUsersInputChar() {
 	    try {
 	      inChar = Character.toUpperCase((char)System.in.read());
 	      // don´t return value if value is enter or line feed
@@ -85,7 +91,7 @@ public class Console {
 	}
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 	// running the program as long as the user don't choose q in the menu
-	public void runMemberRegistration(){
+	/*public void runMemberRegistration(){
 		printMainMenu();
 		while(getUsersInputChar() != 'Q'){
 			if(inChar == '1'){
@@ -131,7 +137,7 @@ public class Console {
 		System.out.println("You want to quit. Bye for now!!");
 		System.exit(0);
 		
-	}
+	} TA BORT DENNA LIGGER I CONTROLLER ISTÄLLET NU*/
 	// ******** SUBMENUS TO THE MAIN MENU member ********
 	// create new member menu JOBBA HÄR!!!!!!!!!!!!!!!!!!!!!!!!!
 	public void printCreateNewMemberMenu(){

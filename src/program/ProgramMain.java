@@ -3,9 +3,6 @@
  */
 package program;
 
-import model.MemberRegistration;
-import view.Console;
-
 /**
  * @author cw222kq
  *
@@ -21,9 +18,9 @@ public class ProgramMain {
 		
 	
 		// run while memberRegistration is true
-		view.Console c = new Console();
-		model.MemberRegistration mr = new MemberRegistration();
-		c.runMemberRegistration();
+		view.Console v = new view.Console();
+		controller.MemberRegistration c = new controller.MemberRegistration();
+		c.runMemberRegistration(v);
 	}
 
 }
