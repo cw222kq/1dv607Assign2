@@ -112,6 +112,7 @@ public class Console {
 		System.out.println("Input members password(no line feeds allowed)");
 		a_member.setPassword(getUsersInputStringOneWord());
 		System.out.println("password: " + a_member.getPassword());
+		
 	}
 	// delete a member menu
 	public void printDeleteAMemberMenu(model.Member a_member){
@@ -171,8 +172,8 @@ public class Console {
 		System.out.println("type: " + a_boat.getType());
 		
 		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
-		a_boat.setPath(getUsersInputStringOneWord());
-		System.out.println("path: " + a_boat.getPath());
+		a_boat.setImagePath(getUsersInputStringOneWord());
+		System.out.println("path: " + a_boat.getImagePath());
 		
 		
 	}
@@ -211,8 +212,8 @@ public class Console {
 		System.out.println("type: " + a_boat.getType());
 		
 		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
-		a_boat.setPath(getUsersInputStringOneWord());
-		System.out.println("path: " + a_boat.getPath());
+		a_boat.setImagePath(getUsersInputStringOneWord());
+		System.out.println("path: " + a_boat.getImagePath());
 		
 	}
 	// ******** MAIN MENU LIST MEMBERS COMPACT AND VERBOSE ********

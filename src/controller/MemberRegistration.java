@@ -17,11 +17,12 @@ public class MemberRegistration {
 	}
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 		// running the program as long as the user don't choose q in the menu
-		public void runMemberRegistration(view.Console a_view, model.Member a_member, model.Boat a_boat){
+		public void runMemberRegistration(view.Console a_view, model.Member a_member, model.Boat a_boat, storage.DB a_db){
 			a_view.printMainMenu();
 			while(!a_view.wantsToQuit()){
 				if(a_view.getInChar() == '1'){
 					a_view.printCreateNewMemberMenu(a_member);
+					a_db.insert(a_member, a_boat, "member");
 					//a_view.emptyInChar();
 				}
 				else if(a_view.getInChar() == '2'){
@@ -61,6 +62,7 @@ public class MemberRegistration {
 				a_view.printMainMenu();
 			}
 			a_view.quit();
+			a_db.closeConnection();
 			
 		}
 

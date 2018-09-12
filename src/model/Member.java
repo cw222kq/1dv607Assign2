@@ -15,7 +15,6 @@ public class Member {
 	private String name;
 	private String password;
 	
-	
 	// the constructor sets the variables (used when creating a new member)
 	public Member(String valueSSN, String valueName, String valuePassword) {
 		this.SSN = valueSSN;
@@ -24,7 +23,6 @@ public class Member {
 	}
 	public Member(){}
 	// setters (used when updating the information about the member)
-	// tror setId kan tas bort iom att vi aldrig sätter det själva
 	public void setSSN(String valueSSN){
 		this.SSN = valueSSN;
 	}
