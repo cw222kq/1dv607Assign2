@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -218,13 +220,27 @@ public class Console {
 	}
 	// ******** MAIN MENU LIST MEMBERS COMPACT AND VERBOSE ********
 	// list member as compact list
-		public void printCompactList(){
-			System.out.println("COMPACT LIST");
+	public void printCompactList(ResultSet r){
+		System.out.println("COMPACT LIST");
+		try {
+			while(r.next()){
+				System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		// list member as verbose list
-		public void printVerboseList(){
-			System.out.println("VERBOSE LIST");
+	}
+	// list member as verbose list
+	public void printVerboseList(ResultSet r){
+		System.out.println("VERBOSE LIST");
+		try {
+			while(r.next()){
+				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", member id: " + r.getInt("member id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}
 		
 
 }

@@ -161,7 +161,28 @@ public class DB {
 		}
 		return boatId;	
 	}
-	
+	// GETTING DATA FROM THE DB
+	// Get compact list (name, member id and number of boats of all members)
+	public ResultSet getCompactList() {
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.id AS 'member id', COUNT(Boat.member_id) AS 'number of boats' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) GROUP BY Boat.member_id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;	
+	}
+	// Get verbose list (name, ssn, member id and boats with boat information of all members)
+	public ResultSet getVerboseList() {
+		rs = null;
+		try {
+			// kvar att få ut även båtinformation
+			rs = statement.executeQuery("SELECT name AS 'member name', ssn AS 'social security number', id AS 'member id' FROM Member");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;	
+	}
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		if(rs != null){

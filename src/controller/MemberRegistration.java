@@ -27,10 +27,10 @@ public class MemberRegistration {
 					a_db.commitTransaction();
 				}
 				else if(a_view.getInChar() == '2'){
-					a_view.printCompactList();
+					a_view.printCompactList(a_db.getCompactList());
 				}
 				else if(a_view.getInChar() == '3'){
-					a_view.printVerboseList();
+					a_view.printVerboseList(a_db.getVerboseList());
 				}
 				else if(a_view.getInChar() == '4'){
 					a_view.printDeleteAMemberMenu(a_member);
