@@ -33,7 +33,7 @@ public class Console {
 	}
 	public void quit(){
 		System.out.println("Quitting the application!");
-		System.exit(0);
+		//System.exit(0);
 	}
 	// print out main menu
 	public void printMainMenu(){

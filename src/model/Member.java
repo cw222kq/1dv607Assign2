@@ -23,6 +23,9 @@ public class Member {
 	}
 	public Member(){}
 	// setters (used when updating the information about the member)
+	public void setId(int valueId){
+		this.id = valueId;
+	}
 	public void setSSN(String valueSSN){
 		this.SSN = valueSSN;
 	}

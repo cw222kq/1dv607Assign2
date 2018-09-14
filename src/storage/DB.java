@@ -18,6 +18,8 @@ public class DB {
 	Connection connection;
 	Statement statement;
 	ResultSet rs;
+	ResultSet rs2;
+	
 	
 	public DB() {
 		connection = null;
@@ -41,6 +43,7 @@ public class DB {
 		}
 		createTables(statement);	
 	}
+	//********** QUERIES **********
 	private void createTables(Statement statment){
 		// create tables if they not already exists
 		try {
@@ -60,41 +63,104 @@ public class DB {
 		}
 		
 	}
-	//********** QUERIES **********
+	// Start transaction
+	public void startTransaction(){
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	// Commit transaction
+	public void commitTransaction(){
+		try {
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} 
+	}
+	
 	// INPUT VALUES INTO THE TABLES
 	// Inserts data into the different tables that is in the db
-		public void insert(model.Member m_member, model.Boat m_boat,String table){
-			try{
-				connection.setAutoCommit(false);
-				// member
-				if(table == "member"){
-					//if(isInTheDB) {return;}
-					if(m_member.getName() == null){return;}
-					statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + m_member.getSSN() + "'" +  ", '" + m_member.getName() + "'" +  ", '" + m_member.getPassword() + "'" + ")");
-				}
-				// boat
-				if(table == "boat"){
-					//if(isInTheDB) {return;}
-					if(m_boat.getType() == null){return;}
-					statement.executeUpdate("INSERT INTO Boat(size,type) VALUES(" + "'" + m_boat.getSize() + "'" + ", '" + m_boat.getType() + "'" +")");
-				}
-				// image
-				if(table == "image"){
-					if(m_boat.getImagePath() == null){return;}
-					statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + m_boat.getImagePath() + "'" + ", " + m_boat.getId() + ")" );
-				}
-				//isInTheDB = false;
-				connection.commit(); 
-			}catch(Exception e){
-				e.printStackTrace();	
-				try {
-					connection.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+	public void insert(model.Member m_member, model.Boat m_boat,String table){
+		try{
+			//connection.setAutoCommit(false);
+			// member
+			if(table == "member"){
+				//if(isInTheDB) {return;}
+				if(m_member.getName() == null){return;}
+				statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + m_member.getSSN() + "'" +  ", '" + m_member.getName() + "'" +  ", '" + m_member.getPassword() + "'" + ")");
 			}
-			// METOD SOM SÄGER ATT COMMMITEN LYCKADES
+			// boat
+			if(table == "boat"){
+				//if(isInTheDB) {return;}
+				if(m_boat.getType() == null){return;}
+				statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + m_boat.getSize() + "'" + ", '" + m_boat.getType() + "'" + ", '" + m_member.getId() + "'" + ")");
+			}
+			// image
+			if(table == "image"){
+				if(m_boat.getImagePath() == null){return;}
+				statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + m_boat.getImagePath() + "'" + ", " + m_boat.getId() + ")" );
+			}
+			//isInTheDB = false;
+			// commiten och rollbacken i en egen metod?
+		//	connection.commit(); 
+		}catch(Exception e){
+			e.printStackTrace();	
+		/*	try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}*/
 		}
+		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS
+	}
+	// FETCH DATA FROM DB TO SUPPORT THE INSERT METODS
+	// Method that returns the member id from the social security number
+	public int getMemberId(String SSN) { 
+		rs = null;
+		int id = 0;
+		try {
+			rs = statement.executeQuery("SELECT id FROM Member WHERE SSN = '" + SSN + "'");
+			while(rs.next()){ 
+				id = rs.getInt("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id;		
+	}
+	// Method that returns the latest added boats id of the specific member (used when the user put in values into the image table)
+	public int getMembersLatestAddedBoatId(int memberId){
+		rs = null;
+		int boatId = 0;
+		try {
+			rs = statement.executeQuery("SELECT MAX(id) FROM Boat WHERE member_id = '" + memberId + "'");
+			while(rs.next()){ 
+				boatId = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return boatId;	
+	}
 	
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
