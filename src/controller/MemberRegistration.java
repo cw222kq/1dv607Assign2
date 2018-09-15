@@ -39,10 +39,12 @@ public class MemberRegistration {
 				}
 				else if(a_view.getInChar() == '5'){
 					a_view.printChangeMembersInformationMenu(a_member);
+					
 				
 				}
 				else if(a_view.getInChar() == '6'){
 					a_view.printLookAtMembersInformationMenu(a_member);
+					a_view.printMembersInformation(a_db.getMemberInformation(a_member.getSSN()));
 					
 				}
 				else if(a_view.getInChar() == '7'){

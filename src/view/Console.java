@@ -241,6 +241,16 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	// print members information
+	public void printMembersInformation(ResultSet r){
+		try {
+			while(r.next()){
+				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")  + ", Member password: " + r.getString("member password") + ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 		
 
 }

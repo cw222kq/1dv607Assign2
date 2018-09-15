@@ -182,6 +182,16 @@ public class DB {
 		} 
 		return rs;	
 	}
+	// Look at a specific members information
+	public ResultSet getMemberInformation(String SSN){
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Member.password AS 'member password', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN = " + "'" + SSN + "'" );
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;		
+	}
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		if(rs != null){
