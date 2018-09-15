@@ -235,7 +235,7 @@ public class Console {
 		System.out.println("VERBOSE LIST");
 		try {
 			while(r.next()){
-				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", member id: " + r.getInt("member id"));
+				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")+ ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

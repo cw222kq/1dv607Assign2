@@ -172,12 +172,11 @@ public class DB {
 		} 
 		return rs;	
 	}
-	// Get verbose list (name, ssn, member id and boats with boat information of all members)
+	// Get verbose list (name, SSN, member id and boats with boat information of all members)
 	public ResultSet getVerboseList() {
 		rs = null;
 		try {
-			// kvar att få ut även båtinformation
-			rs = statement.executeQuery("SELECT name AS 'member name', ssn AS 'social security number', id AS 'member id' FROM Member");
+			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id)");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
