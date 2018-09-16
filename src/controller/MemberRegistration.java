@@ -37,9 +37,6 @@ public class MemberRegistration {
 					a_db.startTransaction();
 					a_db.deleteMember(a_member.getSSN());
 					a_db.commitTransaction();
-					// KONTROLL METODER TAS BORT I SLUTGILTIGA VERSIONEN ***************************************************************************
-					a_view.printBoat(a_db.getBoat());
-					a_view.printImage(a_db.getImage());
 				}
 				else if(a_view.getInChar() == '5'){
 					a_view.printChangeMembersInformationMenu(a_member);
@@ -64,7 +61,10 @@ public class MemberRegistration {
 				
 				}
 				else if(a_view.getInChar() == '8'){
-					a_view.printDeleteABoatMenu(a_member,a_boat);
+					a_view.printDeleteABoatMenuChooseMember(a_member);
+					a_view.printMembersBoats(a_db.getMembersBoats(a_member.getSSN()));
+					a_view.printDeleteABoatMenuChooseBoat(a_boat);
+					a_db.deleteBoat(a_boat.getId());
 					
 				}
 				else if(a_view.getInChar() == '9'){

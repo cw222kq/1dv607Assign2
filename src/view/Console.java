@@ -180,16 +180,18 @@ public class Console {
 		
 	}
 	// delete a boat
-	public void printDeleteABoatMenu(model.Member a_member, model.Boat a_boat){
+	public void printDeleteABoatMenuChooseMember(model.Member a_member){
 		System.out.println("DELETE A BOAT");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete a boat from");
 		a_member.setSSN(getUsersInputStringOneWord());
 		System.out.println("SSN: " + a_member.getSSN());
 		// medlemmens personnummer och namn skrivs utsamt medlemmens alla båtar med tillhörande båtid
+	}
+	public void printDeleteABoatMenuChooseBoat(model.Boat a_boat){
+		// medlemmens personnummer och namn skrivs utsamt medlemmens alla båtar med tillhörande båtid
 		System.out.println("Input the id for the boat you with to delete");
 		a_boat.setId(getUsersInputInteger());
-		System.out.println("id: " + a_boat.getId());
-		
+		System.out.println("id: " + a_boat.getId());	
 	}
 	// change boats information
 	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
@@ -252,10 +254,10 @@ public class Console {
 		}
 	}
 	// TEST SKRIVER UT ALLT I BÅT TAS BORT I SLUTGILTIGA VERSIONEN ENDAST TILL FÖR KONTROLL ************************************************************
-	public void printBoat(ResultSet r){
+	public void printMembersBoats(ResultSet r){
 		try {
 			while(r.next()){
-				System.out.println("Boat id: " + r.getInt("id") + ", Size: " + r.getInt("size") + ", Type: " + r.getString("type")  + ", Member id: " + r.getInt("member_id"));
+				System.out.println("Boat id: " + r.getInt("id") + ", Size: " + r.getInt("size") + ", Type: " + r.getString("type"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

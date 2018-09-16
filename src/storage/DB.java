@@ -212,11 +212,20 @@ public class DB {
 			e.printStackTrace();
 		} 		
 	}
-	// KONTROLL METOD TAS BORT I SLUTGILTIGA VERSIONEN HÄMTAR UT INNEHÅLLET I BOAT TABELLEN ******************************************************
-	public ResultSet getBoat(){
+	// Delete a boat
+	public void deleteBoat(int id){
+		try {
+			statement.executeUpdate("DELETE FROM Boat WHERE id =" + "'" + id + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 		
+	}
+	
+	// Getting the members boats from the db when the user input members SSN
+	public ResultSet getMembersBoats(String SSN){
 		rs = null;
 		try {
-			rs = statement.executeQuery("SELECT id, size, type, member_id FROM Boat");
+			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) WHERE Member.SSN =" + "'" + SSN + "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
