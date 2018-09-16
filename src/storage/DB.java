@@ -204,6 +204,17 @@ public class DB {
 		} 
 		return rs;		
 	}
+	// Change membersInformationPre 
+	public ResultSet changeMembersInformationPre(model.Member m_member){
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + m_member.getSSN()+ "'" );
+			m_member.setId(rs.getInt("member id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;	
+	}
 	// Delete a member
 	public void deleteMember(String SSN){
 		try {
@@ -215,12 +226,11 @@ public class DB {
 	// Delete a boat
 	public void deleteBoat(int id){
 		try {
-			statement.executeUpdate("DELETE FROM Boat WHERE id =" + "'" + id + "'");
+			statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 		
 	}
-	
 	// Getting the members boats from the db when the user input members SSN
 	public ResultSet getMembersBoats(String SSN){
 		rs = null;
@@ -230,6 +240,14 @@ public class DB {
 			e.printStackTrace();
 		} 
 		return rs;		
+	}
+	// Update the members information
+	public void updateMemberInformation(model.Member m_member){
+		try {
+			statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + m_member.getSSN() + "', name =" + "'" + m_member.getName() + "', password =" + "'" + m_member.getPassword()+ "' WHERE id =" + m_member.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 	
 	}
 	// KONTROLL METOD TAS BORT I SLUTGILTIGA VERSIONEN HÄMTAR UT INNEHÅLLET I IMAGE TABELLEN **********************************************************
 	public ResultSet getImage(){
@@ -241,7 +259,6 @@ public class DB {
 		} 
 		return rs;		
 	}
-	
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		if(rs != null){

@@ -39,8 +39,12 @@ public class MemberRegistration {
 					a_db.commitTransaction();
 				}
 				else if(a_view.getInChar() == '5'){
+					a_view.printChangeMembersInformationMenuPre(a_member);
+					a_view.printChangeMembersInformationPre(a_db.changeMembersInformationPre(a_member));
 					a_view.printChangeMembersInformationMenu(a_member);
-					
+					a_db.startTransaction();
+					a_db.updateMemberInformation(a_member);
+					a_db.commitTransaction();
 				
 				}
 				else if(a_view.getInChar() == '6'){
@@ -71,7 +75,7 @@ public class MemberRegistration {
 					a_view.printChangeBoatsInformationMenu(a_member,a_boat);
 					
 				}
-				else {System.out.println("DU HAMNADE I ELSEN. SKRIV ETT FELMEDDELANDE I CONSOLEN OCH ANROPA DEN METODEN HÄR");}
+				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");}
 				System.out.println("The user don´t want to quit");
 				a_view.printMainMenu();
 			}

@@ -21,8 +21,7 @@ public class Console {
 	private char inChar;
 
 	public Console() {
-		
-		
+			
 	}
 	public void emptyInChar(){
 		this.inChar = '0';
@@ -124,15 +123,16 @@ public class Console {
 		System.out.println("SSN: " + a_member.getSSN());
 		
 	}
-	// change members information menu(only changes the information if the user input some new data, if the user only presses enter the old value remains)
-	public void printChangeMembersInformationMenu(model.Member a_member){
+	// ask for SSN of the member
+	public void printChangeMembersInformationMenuPre(model.Member a_member){
 		System.out.println("CHANGE MEMBERS INFORMATION");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to make some changes to");
 		a_member.setSSN(getUsersInputStringOneWord());
 		System.out.println("SSN: " + a_member.getSSN());
-		
-		//databasen hämtar ut och skriver ut attributen och dess nuvarande värden
-		// använd samma metod som för nedanstående metod
+	}
+	
+	// change members information menu(only changes the information if the user input some new data, if the user only presses enter the old value remains)
+	public void printChangeMembersInformationMenu(model.Member a_member){
 		
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the new social security number(yymmddxxxx)");
@@ -151,7 +151,7 @@ public class Console {
 	// look at members information menu
 	public void printLookAtMembersInformationMenu(model.Member a_member){
 		System.out.println("LOOK AT MEMBERS INFORMATION");
-		System.out.println("Input the social security number(yymmddxxxx) of the member you want to look at");
+		System.out.println("Input the social security number(yymmddxxxx) of the specific member");
 		a_member.setSSN(getUsersInputStringOneWord());
 		System.out.println("SSN: " + a_member.getSSN());
 		
@@ -176,8 +176,7 @@ public class Console {
 		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
 		a_boat.setImagePath(getUsersInputStringOneWord());
 		System.out.println("path: " + a_boat.getImagePath());
-		
-		
+			
 	}
 	// delete a boat
 	public void printDeleteABoatMenuChooseMember(model.Member a_member){
@@ -274,5 +273,16 @@ public class Console {
 			e.printStackTrace();
 		}
 	}	
+	// print change members information pre
+	public void printChangeMembersInformationPre(ResultSet r){
+		try {
+			while(r.next()){
+				System.out.println("Member id: " + r.getInt("member id") + ", SSN: " + r.getString("social security number") + ", Member name: " + r.getString("member name") + ", Member password: " + r.getString("member password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }
