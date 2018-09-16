@@ -72,7 +72,14 @@ public class MemberRegistration {
 					
 				}
 				else if(a_view.getInChar() == '9'){
-					a_view.printChangeBoatsInformationMenu(a_member,a_boat);
+					a_view.printChangeBoatsInformationMenuPre(a_member);
+					a_view.printMembersBoats(a_db.getMembersBoats(a_member.getSSN()));
+					a_view.printChangeBoatInformationMenuChooseBoat(a_boat);
+					a_view.printASpecificBoat(a_db.getASpecificBoat(a_boat.getId()));
+					a_view.printChangeBoatsInformationMenu(a_member, a_boat); 
+					a_db.startTransaction();
+					a_db.updateBoatInformation(a_boat);
+					a_db.commitTransaction();
 					
 				}
 				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");}

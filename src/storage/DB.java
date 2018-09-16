@@ -17,8 +17,8 @@ public class DB {
 
 	Connection connection;
 	Statement statement;
+	Statement state;
 	ResultSet rs;
-	ResultSet rs2;
 	
 	
 	public DB() {
@@ -38,6 +38,7 @@ public class DB {
 		}
 		try {
 			statement = connection.createStatement();
+			state = connection.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -241,10 +242,29 @@ public class DB {
 		} 
 		return rs;		
 	}
+	// Getting a specific boat
+	public ResultSet getASpecificBoat(int id){
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT id, size,type FROM Boat WHERE id =" + id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;	
+	}
 	// Update the members information
 	public void updateMemberInformation(model.Member m_member){
 		try {
 			statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + m_member.getSSN() + "', name =" + "'" + m_member.getName() + "', password =" + "'" + m_member.getPassword()+ "' WHERE id =" + m_member.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 	
+	}
+	// Update the boats information
+	public void updateBoatInformation(model.Boat m_boat){
+		try {
+			statement.executeUpdate("UPDATE Boat SET size =" + m_boat.getSize() + ", type =" + "'" + m_boat.getType() + "' WHERE id=" + m_boat.getId());
+			state.executeUpdate("UPDATE Image SET path =" + "'" + m_boat.getImagePath()+ "' WHERE boat_id =" + m_boat.getId()); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 	

@@ -130,7 +130,6 @@ public class Console {
 		a_member.setSSN(getUsersInputStringOneWord());
 		System.out.println("SSN: " + a_member.getSSN());
 	}
-	
 	// change members information menu(only changes the information if the user input some new data, if the user only presses enter the old value remains)
 	public void printChangeMembersInformationMenu(model.Member a_member){
 		
@@ -192,29 +191,31 @@ public class Console {
 		a_boat.setId(getUsersInputInteger());
 		System.out.println("id: " + a_boat.getId());	
 	}
-	// change boats information
-	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
+	// ask for SSN of the member
+	public void printChangeBoatsInformationMenuPre(model.Member a_member){
 		System.out.println("CHANGE BOATS INFORMATION");
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to change a boats information from");
 		a_member.setSSN(getUsersInputStringOneWord());
 		System.out.println("SSN: " + a_member.getSSN());
-		
-		// medlemmens personnummer och namn skrivs ut samt medlemmens alla båtar med tillhörande båtid
+	}
+	// ask for boat id
+	public void printChangeBoatInformationMenuChooseBoat(model.Boat a_boat){
 		System.out.println("Input the id for the boat you with to change");
 		a_boat.setId(getUsersInputInteger());
-		System.out.println("id: " + a_boat.getId());
-		
-		//den valda båtens information skrivs ut
+		System.out.println("id: " + a_boat.getId());	
+	}
+	// change boats information
+	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
-		System.out.println("Input the size of the boat");
+		System.out.println("Input the new size of the boat");
 		a_boat.setSize(getUsersInputInteger());
 		System.out.println("size: " + a_boat.getSize());
 		
-		System.out.println("Input the type of the boat");
+		System.out.println("Input the new type of the boat");
 		a_boat.setType(getUsersInputStringTwoWords());
 		System.out.println("type: " + a_boat.getType());
 		
-		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
+		System.out.println("Input the new path to the image of the boat(optional, possible to leave empty)");
 		a_boat.setImagePath(getUsersInputStringOneWord());
 		System.out.println("path: " + a_boat.getImagePath());
 		
@@ -283,6 +284,16 @@ public class Console {
 			e.printStackTrace();
 		}
 		
+	}
+	// print a specific boat
+	public void printASpecificBoat(ResultSet r){
+		try {
+			while(r.next()){
+				System.out.println("Boat id: " + r.getInt("id") + ", Boat size: " + r.getString("size") + ", Boat type: " + r.getString("type"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
