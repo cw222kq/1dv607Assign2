@@ -41,6 +41,7 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		setConfig();
 		createTables(statement);	
 	}
 	//********** QUERIES **********
@@ -52,16 +53,27 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Boat(id INTEGER PRIMARY KEY AUTOINCREMENT, size INTEGER NOT NULL, type TEXT NOT NULL, member_id INTEGER NOT NULL, FOREIGN KEY(member_id) REFERENCES Member(id) ON UPDATE CASCADE)");
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Boat(id INTEGER PRIMARY KEY AUTOINCREMENT, size INTEGER NOT NULL, type TEXT NOT NULL, member_id INTEGER NOT NULL, FOREIGN KEY(member_id) REFERENCES Member(id) ON UPDATE CASCADE ON DELETE CASCADE)");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Image(id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT NOT NULL, boat_id INTEGER NOT NULL, FOREIGN KEY(boat_id) REFERENCES boat(id) ON UPDATE CASCADE)");
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Image(id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT NOT NULL, boat_id INTEGER NOT NULL, FOREIGN KEY(boat_id) REFERENCES boat(id) ON UPDATE CASCADE ON DELETE CASCADE)");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	private void setConfig(){
+		
+		org.sqlite.SQLiteConfig config = new org.sqlite.SQLiteConfig();
+	    config.enforceForeignKeys(true);
+	    try {
+			statement.execute("PRAGMA foreign_keys = ON");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 	// Start transaction
 	public void startTransaction(){
@@ -121,7 +133,7 @@ public class DB {
 		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS
 	}
 	// FETCH DATA FROM DB TO SUPPORT THE INSERT METODS
-	// Method that returns the member id from the social security number
+	// Method that returns the member id from the social security number TROR DENNA KAN TAS BORT!!!!!!!!!!!!!
 	public int getMemberId(String SSN) { 
 		rs = null;
 		int id = 0;
@@ -192,6 +204,35 @@ public class DB {
 		} 
 		return rs;		
 	}
+	// Delete a member
+	public void deleteMember(String SSN){
+		try {
+			statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 		
+	}
+	// KONTROLL METOD TAS BORT I SLUTGILTIGA VERSIONEN HÄMTAR UT INNEHÅLLET I BOAT TABELLEN ******************************************************
+	public ResultSet getBoat(){
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT id, size, type, member_id FROM Boat");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;		
+	}
+	// KONTROLL METOD TAS BORT I SLUTGILTIGA VERSIONEN HÄMTAR UT INNEHÅLLET I IMAGE TABELLEN **********************************************************
+	public ResultSet getImage(){
+		rs = null;
+		try {
+			rs = statement.executeQuery("SELECT id, path, boat_id FROM Image");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;		
+	}
+	
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		if(rs != null){

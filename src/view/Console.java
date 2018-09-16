@@ -251,6 +251,26 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
-		
+	// TEST SKRIVER UT ALLT I BÅT TAS BORT I SLUTGILTIGA VERSIONEN ENDAST TILL FÖR KONTROLL ************************************************************
+	public void printBoat(ResultSet r){
+		try {
+			while(r.next()){
+				System.out.println("Boat id: " + r.getInt("id") + ", Size: " + r.getInt("size") + ", Type: " + r.getString("type")  + ", Member id: " + r.getInt("member_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// TEST SKRIVER UT ALLT I IMAGE TAS BORT I SLUTGILTIGA VERSIONEN ENDAST TILL FÖR KONTROLL **************************************************************
+	public void printImage(ResultSet r){
+		try {
+			while(r.next()){
+				System.out.println("Image id: " + r.getInt("id") + ", path: " + r.getString("path") + ", Boat id: " + r.getInt("boat_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
 
 }

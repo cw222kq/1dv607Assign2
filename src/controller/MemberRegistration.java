@@ -34,8 +34,12 @@ public class MemberRegistration {
 				}
 				else if(a_view.getInChar() == '4'){
 					a_view.printDeleteAMemberMenu(a_member);
-					
-			
+					a_db.startTransaction();
+					a_db.deleteMember(a_member.getSSN());
+					a_db.commitTransaction();
+					// KONTROLL METODER TAS BORT I SLUTGILTIGA VERSIONEN ***************************************************************************
+					a_view.printBoat(a_db.getBoat());
+					a_view.printImage(a_db.getImage());
 				}
 				else if(a_view.getInChar() == '5'){
 					a_view.printChangeMembersInformationMenu(a_member);
