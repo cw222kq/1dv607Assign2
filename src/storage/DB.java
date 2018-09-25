@@ -20,7 +20,6 @@ public class DB {
 	Statement state;
 	ResultSet rs;
 	
-	
 	public DB() {
 		connection = null;
 	}
@@ -102,7 +101,6 @@ public class DB {
 	// Inserts data into the different tables that is in the db
 	public void insert(model.Member m_member, model.Boat m_boat,String table){
 		try{
-			//connection.setAutoCommit(false);
 			// member
 			if(table == "member"){
 				//if(isInTheDB) {return;}
@@ -120,21 +118,14 @@ public class DB {
 				if(m_boat.getImagePath() == null){return;}
 				statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + m_boat.getImagePath() + "'" + ", " + m_boat.getId() + ")" );
 			}
-			//isInTheDB = false;
-			// commiten och rollbacken i en egen metod?
-		//	connection.commit(); 
+		
 		}catch(Exception e){
 			e.printStackTrace();	
-		/*	try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}*/
 		}
 		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS
 	}
 	// FETCH DATA FROM DB TO SUPPORT THE INSERT METODS
-	// Method that returns the member id from the social security number TROR DENNA KAN TAS BORT!!!!!!!!!!!!!
+	// Method that returns the member id from the social security number
 	public int getMemberId(String SSN) { 
 		rs = null;
 		int id = 0;
@@ -205,8 +196,8 @@ public class DB {
 		} 
 		return rs;		
 	}
-	// Change membersInformationPre 
-	public ResultSet changeMembersInformationPre(model.Member m_member){
+	// Change membersInformation 
+	public ResultSet changeMembersInformation(model.Member m_member){
 		rs = null;
 		try {
 			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + m_member.getSSN()+ "'" );
@@ -236,7 +227,7 @@ public class DB {
 	public ResultSet getMembersBoats(String SSN){
 		rs = null;
 		try {
-			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) WHERE Member.SSN =" + "'" + SSN + "'");
+			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN =" + "'" + SSN + "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -246,7 +237,7 @@ public class DB {
 	public ResultSet getASpecificBoat(int id){
 		rs = null;
 		try {
-			rs = statement.executeQuery("SELECT id, size,type FROM Boat WHERE id =" + id);
+			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.id =" + id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -268,16 +259,6 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 	
-	}
-	// KONTROLL METOD TAS BORT I SLUTGILTIGA VERSIONEN HÄMTAR UT INNEHÅLLET I IMAGE TABELLEN **********************************************************
-	public ResultSet getImage(){
-		rs = null;
-		try {
-			rs = statement.executeQuery("SELECT id, path, boat_id FROM Image");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;		
 	}
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
