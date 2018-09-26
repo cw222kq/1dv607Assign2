@@ -23,6 +23,7 @@ public class MemberRegistration {
 				
 				// 1. Create a new member
 				if(a_view.getInChar() == '1'){
+					
 					a_view.printCreateNewMemberMenu(a_member);
 					
 					// Inserting the member in the member table in the db
@@ -32,20 +33,26 @@ public class MemberRegistration {
 				}
 				// 2. List all members as compact list
 				else if(a_view.getInChar() == '2'){
+					
 					a_view.printCompactList(a_db.getCompactList());
+					
 				}
 				// 3. List all members as verbose list
 				else if(a_view.getInChar() == '3'){
+					
 					a_view.printVerboseList(a_db.getVerboseList());
+		
 				}
 				// 4. Delete a member
 				else if(a_view.getInChar() == '4'){
+					
 					a_view.printDeleteAMemberMenu(a_member);
 					
-					// Deleting the member in the db
+					// Deleting the member in the db 
 					a_db.startTransaction();
 					a_db.deleteMember(a_member.getSSN());
 					a_db.commitTransaction();
+				
 				}
 				// 5. Change members information
 				else if(a_view.getInChar() == '5'){
@@ -71,7 +78,7 @@ public class MemberRegistration {
 					
 					// printing out the specific members information
 					a_view.printWholeMembersInformation(a_db.getMemberInformation(a_member.getSSN()));
-					
+				
 				}
 				// 7. Register a new boat
 				else if(a_view.getInChar() == '7'){
@@ -79,7 +86,7 @@ public class MemberRegistration {
 					// choose the member that the user wants to register a new boat for
 					a_view.printRegisterANewBoatMenu(a_member,a_boat);
 					a_member.setId(a_db.getMemberId(a_member.getSSN()));
-					
+							
 					// inserting the data into the boat table
 					a_db.startTransaction();
 					a_db.insert(a_member, a_boat, "boat");
@@ -92,7 +99,7 @@ public class MemberRegistration {
 					a_db.startTransaction();
 					a_db.insert(a_member, a_boat, "image");
 					a_db.commitTransaction();
-				
+					
 				}
 				// 8. Delete a boat
 				else if(a_view.getInChar() == '8'){
@@ -110,7 +117,7 @@ public class MemberRegistration {
 					a_db.startTransaction();
 					a_db.deleteBoat(a_boat.getId());
 					a_db.commitTransaction();
-					
+				
 				}
 				// 9. Change boats information
 				else if(a_view.getInChar() == '9'){
@@ -132,7 +139,7 @@ public class MemberRegistration {
 					a_db.startTransaction();
 					a_db.updateBoatInformation(a_boat);
 					a_db.commitTransaction();
-					
+				
 				}
 				// If the user inputs a value that don't exists
 				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");}

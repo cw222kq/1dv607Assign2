@@ -21,7 +21,7 @@ public class DB {
 	ResultSet rs;
 	
 	public DB() {
-		connection = null;
+		this.connection = null;
 	}
 	public void connect() {
 		
@@ -31,18 +31,18 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:database/boatMembers.db");
+			this.connection = DriverManager.getConnection("jdbc:sqlite:database/boatMembers.db");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
-			statement = connection.createStatement();
-			state = connection.createStatement();
+			this.statement = this.connection.createStatement();
+			this.state = this.connection.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		setConfig();
-		createTables(statement);	
+		createTables(this.statement);	
 	}
 	//********** QUERIES **********
 	private void createTables(Statement statment){
@@ -78,7 +78,7 @@ public class DB {
 	// Start transaction
 	public void startTransaction(){
 		try {
-			connection.setAutoCommit(false);
+			this.connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -86,11 +86,11 @@ public class DB {
 	// Commit transaction
 	public void commitTransaction(){
 		try {
-			connection.commit();
+			this.connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
-				connection.rollback();
+				this.connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -266,13 +266,13 @@ public class DB {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}	
 		}
 		try {
-			connection.close();
+			this.connection.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
