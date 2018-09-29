@@ -13,15 +13,11 @@ import java.util.Scanner;
  */
 public class Console {
 	
-	// tror denna måste vara i modellen
 	private boolean start = true;
 	private Scanner scan;
 	private Scanner scanner;
 	private char inChar;
 
-	public Console() {
-			
-	}
 	public void emptyInChar(){
 		this.inChar = '0';
 	}
@@ -33,12 +29,11 @@ public class Console {
 	}
 	public void quit(){
 		System.out.println("Quitting the application!");
-		//System.exit(0);
+		System.exit(0);
 	}
 	// print out main menu
 	public void printMainMenu(){
 		// welcome messages who prints out when the user starts the program
-		// tror denna if sats måste vara i modellen
 		if(start){
 			System.out.println("**** Welcome to The Jolly Pirate ****");
 			start = false;
@@ -67,13 +62,10 @@ public class Console {
 	      while (inChar == '\r' || inChar =='\n') {
 	    	  inChar = Character.toUpperCase((char)System.in.read());
 		  }
-	      System.out.print("You entered ");
-	      System.out.println(inChar);
-		     
+	         
 	      return inChar;
 	    } 
 	    catch (java.io.IOException e) {
-	      System.out.println("inne i catchen");
 	      System.err.println("" + e);
 		      
 	      return 0;
@@ -100,8 +92,7 @@ public class Console {
 	// ******** SUBMENUS TO THE MAIN MENU member ********
 	// create new member menu
 	public void printCreateNewMemberMenu(model.Member a_member){
-		System.out.println("CREATE NEW MEMBER");
-		System.out.println("MEMBERS INFORMATION");
+
 		System.out.println("Input members social security number(yymmddxxxx)");
 		a_member.setSSN(getUsersInputStringOneWord());
 		
@@ -114,7 +105,7 @@ public class Console {
 	}
 	// delete a member menu
 	public void printDeleteAMemberMenu(model.Member a_member){
-		System.out.println("DELETE A MEMBER");
+		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete");
 		a_member.setSSN(getUsersInputStringOneWord());
 		
@@ -135,7 +126,7 @@ public class Console {
 	}
 	// look at members information menu
 	public void printLookAtMembersInformationMenu(model.Member a_member){
-		System.out.println("LOOK AT MEMBERS INFORMATION");
+		
 		System.out.println("Input the social security number(yymmddxxxx) of the specific member");
 		a_member.setSSN(getUsersInputStringOneWord());
 			
@@ -143,7 +134,7 @@ public class Console {
 	// ******** SUBMENUS TO THE MAIN MENU boat ********
 	// register a new boat
 	public void printRegisterANewBoatMenu(model.Member a_member, model.Boat a_boat){
-		System.out.println("REGISTER A NEW BOAT");
+		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to register a new boat for");
 		a_member.setSSN(getUsersInputStringOneWord());
 		
@@ -160,7 +151,7 @@ public class Console {
 	// delete a boat methods
 	// Choosing member to delete a boat from
 	public void printDeleteABoatMenuChooseMember(model.Member a_member){
-		System.out.println("DELETE A BOAT");
+		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete a boat from");
 		a_member.setSSN(getUsersInputStringOneWord());
 	}
@@ -173,11 +164,13 @@ public class Console {
 	// change boat information methods
 	// Selects which boat to change 
 	public void printChangeBoatInformationMenuChooseBoat(model.Boat a_boat){
+		
 		System.out.println("Input the id for the boat you with to change");
 		a_boat.setId(getUsersInputInteger());	
 	}
 	// changing the selected boats information
 	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
+		
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the new size of the boat");
 		a_boat.setSize(getUsersInputInteger());
@@ -192,7 +185,6 @@ public class Console {
 	// ******** RESULTSET METHODS GETTING THE DATA FROM THE DATABASE *********
 	// list member as compact list
 	public void printCompactList(ResultSet r){
-		System.out.println("COMPACT LIST");
 		try {
 			while(r.next()){
 				System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
@@ -203,7 +195,6 @@ public class Console {
 	}
 	// list member as verbose list
 	public void printVerboseList(ResultSet r){
-		System.out.println("VERBOSE LIST");
 		try {
 			while(r.next()){
 				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")+ ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
@@ -252,6 +243,35 @@ public class Console {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	//  ******** HEADLINES  *********
+	// prints out the headlines for the submenus
+	public void printHeadlineCreateNewMember(){
+		System.out.println("1. CREATE NEW MEMBER");
+	}
+	public void printHeadlineCompactList() {
+		System.out.println("2. COMPACT LIST");
+	}
+	public void printHeadlineVerboseList() {
+		System.out.println("3. VERBOSE LIST");
+	}
+	public void printHeadlineDeleteAMember() {
+		System.out.println("4. DELETE A MEMBER");
+	}
+	public void printHeadlineChangeMembersInformation() {
+		System.out.println("5. CHANGE MEMBERS INFORMATION");
+	}
+	public void printHeadlineLookAtASpecificMembersInformation() {
+		System.out.println("6. LOOK AT A SPECIFIC MEMBER INFORMATION");
+	}
+	public void printHeadlineRegisterANewBoat() {
+		System.out.println("7. REGISTER A NEW BOAT");
+	}
+	public void printHeadlineDeleteABoat() {
+		System.out.println("8. DELETE A BOAT");
+	}
+	public void printHeadlineChangeABoatsInforamtion() {
+		System.out.println("9. CHANGE A BOATS INFORMATION");
 	}
 
 }

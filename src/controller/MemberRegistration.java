@@ -12,143 +12,147 @@ public class MemberRegistration {
 	/**
 	 * 
 	 */
-	public MemberRegistration() {
-		
-	}
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 		// running the program as long as the user don't choose q in the menu
-		public void runMemberRegistration(view.Console a_view, model.Member a_member, model.Boat a_boat, storage.DB a_db){
+		public void runMemberRegistration(view.Console a_view, model.Member a_member, model.Boat a_boat, model.DAO a_dao){ 
 			a_view.printMainMenu();
 			while(!a_view.wantsToQuit()){
 				
 				// 1. Create a new member
 				if(a_view.getInChar() == '1'){
 					
+					a_view.printHeadlineCreateNewMember();
 					a_view.printCreateNewMemberMenu(a_member);
 					
-					// Inserting the member in the member table in the db
-					a_db.startTransaction();
-					a_db.insert(a_member, a_boat, "member");
-					a_db.commitTransaction();
+					// Inserting the member in the member table in the db NY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					a_dao.startTransaction();
+					a_dao.insert(a_member, a_boat, "member");
+					a_dao.commitTransaction();
 				}
 				// 2. List all members as compact list
 				else if(a_view.getInChar() == '2'){
 					
-					a_view.printCompactList(a_db.getCompactList());
+					a_view.printHeadlineCompactList();
+					a_view.printCompactList(a_dao.getCompactList());
 					
 				}
 				// 3. List all members as verbose list
 				else if(a_view.getInChar() == '3'){
-					
-					a_view.printVerboseList(a_db.getVerboseList());
+				
+					a_view.printHeadlineVerboseList();
+					a_view.printVerboseList(a_dao.getVerboseList());
 		
 				}
 				// 4. Delete a member
 				else if(a_view.getInChar() == '4'){
 					
+					a_view.printHeadlineDeleteAMember();
 					a_view.printDeleteAMemberMenu(a_member);
 					
-					// Deleting the member in the db 
-					a_db.startTransaction();
-					a_db.deleteMember(a_member.getSSN());
-					a_db.commitTransaction();
+					// Deleting the member in the db
+					a_dao.startTransaction();
+					a_dao.deleteMember(a_member.getSSN());
+					a_dao.commitTransaction();
 				
 				}
-				// 5. Change members information
+				// 5. Change members information /// JOBBA HÄR !!!!!!!!!!!!!
 				else if(a_view.getInChar() == '5'){
 					
+					a_view.printHeadlineChangeMembersInformation();
 					// printing the current member information on the specific member from the db
 					a_view.printLookAtMembersInformationMenu(a_member);
-					a_view.printMembersInformation(a_db.changeMembersInformation(a_member));
+					a_view.printMembersInformation(a_dao.getMembersInformation(a_member));
 					
 					// printing out the menu for changing the specific member and setting the new values
 					a_view.printChangeMembersInformationMenu(a_member);
 					
-					// updating the information about the member in the db
-					a_db.startTransaction();
-					a_db.updateMemberInformation(a_member);
-					a_db.commitTransaction();
+					// updating the information about the member in the db 
+					a_dao.startTransaction();
+					a_dao.updateMemberInformation(a_member);
+					a_dao.commitTransaction();
 				
 				}
 				// 6. View members information
 				else if(a_view.getInChar() == '6'){
 					
+					a_view.printHeadlineLookAtASpecificMembersInformation();
 					// choose the specific member
 					a_view.printLookAtMembersInformationMenu(a_member);
 					
 					// printing out the specific members information
-					a_view.printWholeMembersInformation(a_db.getMemberInformation(a_member.getSSN()));
+					a_view.printWholeMembersInformation(a_dao.getMemberInformation(a_member.getSSN()));
 				
 				}
 				// 7. Register a new boat
 				else if(a_view.getInChar() == '7'){
 					
+					a_view.printHeadlineRegisterANewBoat();
 					// choose the member that the user wants to register a new boat for
 					a_view.printRegisterANewBoatMenu(a_member,a_boat);
-					a_member.setId(a_db.getMemberId(a_member.getSSN()));
+					a_member.setId(a_dao.getMemberId(a_member.getSSN()));
 							
-					// inserting the data into the boat table
-					a_db.startTransaction();
-					a_db.insert(a_member, a_boat, "boat");
-					a_db.commitTransaction();
+					// inserting the data into the boat table 
+					a_dao.startTransaction();
+					a_dao.insert(a_member, a_boat, "boat");
+					a_dao.commitTransaction();
 					
 					// getting the boat id of the latest boat that the member has added (for setting the boat_id into the image table)
-					a_boat.setId(a_db.getMembersLatestAddedBoatId(a_member.getId()));
+					a_boat.setId(a_dao.getMembersLatestAddedBoatId(a_member.getId()));
 					
-					//inserting the data into the image table
-					a_db.startTransaction();
-					a_db.insert(a_member, a_boat, "image");
-					a_db.commitTransaction();
-					
+					//inserting the data into the image table 
+					a_dao.startTransaction();
+					a_dao.insert(a_member, a_boat, "image");
+					a_dao.commitTransaction();
 				}
 				// 8. Delete a boat
 				else if(a_view.getInChar() == '8'){
 					
+					a_view.printHeadlineDeleteABoat();
 					// Choose the member that the user wants to delete a boat from
 					a_view.printDeleteABoatMenuChooseMember(a_member);
 					
 					// printing out all the specific members boats
-					a_view.printAllMembersBoats(a_db.getMembersBoats(a_member.getSSN()));
+					a_view.printAllMembersBoats(a_dao.getMembersBoats(a_member.getSSN()));
 					
 					// Choose the specific boat to delete from the member
 					a_view.printDeleteABoatMenuChooseBoat(a_boat);
 					
-					// Deleting the boat in the db
-					a_db.startTransaction();
-					a_db.deleteBoat(a_boat.getId());
-					a_db.commitTransaction();
+					// Deleting the boat in the db 
+					a_dao.startTransaction();
+					a_dao.deleteBoat(a_boat.getId());
+					a_dao.commitTransaction();
 				
 				}
-				// 9. Change boats information
+				// 9. Change boats information /// JOBBA HÄR !!!!!!!!!!!!!!
 				else if(a_view.getInChar() == '9'){
 					
+					a_view.printHeadlineChangeABoatsInforamtion();
 					// Choose the member that the user wants to modify a boat from
 					a_view.printLookAtMembersInformationMenu(a_member);
 					
-					// printing out all boats from the specific member
-					a_view.printAllMembersBoats(a_db.getMembersBoats(a_member.getSSN()));
+					// printing out all boats from the specific member 
+					a_view.printAllMembersBoats(a_dao.getMembersBoats(a_member.getSSN()));
 					
 					// Choose the specific boat to modify from the member
 					a_view.printChangeBoatInformationMenuChooseBoat(a_boat);
-					a_view.printASpecificBoat(a_db.getASpecificBoat(a_boat.getId()));
+					a_view.printASpecificBoat(a_dao.getASpecificBoat(a_boat.getId()));
 					
 					// printing out the menu for changing the specific boat and setting the new values
 					a_view.printChangeBoatsInformationMenu(a_member, a_boat); 
 					
-					// updating the information about the boat in the db
-					a_db.startTransaction();
-					a_db.updateBoatInformation(a_boat);
-					a_db.commitTransaction();
+					// updating the information about the boat in the db 
+					a_dao.startTransaction();
+					a_dao.updateBoatInformation(a_boat);
+					a_dao.commitTransaction();
 				
 				}
 				// If the user inputs a value that don't exists
-				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");}
-				System.out.println("The user don´t want to quit");
+				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");} // gör en metod som skriver ut detta i console klassen
 				a_view.printMainMenu();
 			}
 			// If the user choose Q ends the while loop and the application quits
 			a_view.quit();
-			a_db.closeConnection();
+			a_dao.closeConnection();
 			
 		}
 
