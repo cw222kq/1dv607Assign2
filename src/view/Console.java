@@ -13,7 +13,8 @@ import java.util.Scanner;
  */
 public class Console {
 	
-	private boolean start = true;
+	public Console(){printWelcomeMessage();}
+	
 	private Scanner scan;
 	private Scanner scanner;
 	private char inChar;
@@ -33,11 +34,7 @@ public class Console {
 	}
 	// print out main menu
 	public void printMainMenu(){
-		// welcome messages who prints out when the user starts the program
-		if(start){
-			System.out.println("**** Welcome to The Jolly Pirate ****");
-			start = false;
-		}
+		
 		System.out.println("Please make your choice");
 		System.out.println("** MEMBER **");
 		System.out.println("<1> CREATE NEW MEMBER");
@@ -61,8 +58,7 @@ public class Console {
 	      // don´t return value if value is enter or line feed
 	      while (inChar == '\r' || inChar =='\n') {
 	    	  inChar = Character.toUpperCase((char)System.in.read());
-		  }
-	         
+		  }  
 	      return inChar;
 	    } 
 	    catch (java.io.IOException e) {
@@ -110,10 +106,10 @@ public class Console {
 		a_member.setSSN(getUsersInputStringOneWord());
 		
 	}
-	// change members information menu(only changes the information if the user input some new data, if the user only presses enter the old value remains)
+	// change members information menu
 	public void printChangeMembersInformationMenu(model.Member a_member){
 		
-		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
+		System.out.println("Make the wanted changes.");
 		System.out.println("Input the new social security number(yymmddxxxx)");
 		a_member.setSSN(getUsersInputStringOneWord());
 		
@@ -225,6 +221,9 @@ public class Console {
 	}
 	// print all information about the member (i.e all the data in the member table)
 	public void printMembersInformation(ResultSet r){
+		if(r == null){System.out.println("null"); 
+			return;
+		}
 		try {
 			while(r.next()){
 				System.out.println("Member id: " + r.getInt("member id") + ", SSN: " + r.getString("social security number") + ", Member name: " + r.getString("member name") + ", Member password: " + r.getString("member password"));
@@ -272,6 +271,15 @@ public class Console {
 	}
 	public void printHeadlineChangeABoatsInforamtion() {
 		System.out.println("9. CHANGE A BOATS INFORMATION");
+	}
+	private void printWelcomeMessage(){
+		System.out.println("**** Welcome to The Jolly Pirate ****");
+	}
+	public void printErrorMessageWrongChoice(){
+		System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");
+	}
+	public void printErrorMessageUserIsNotInDB(){
+		System.out.println("The user is not in the database. Please add the user first");
 	}
 
 }

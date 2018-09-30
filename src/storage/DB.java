@@ -69,7 +69,6 @@ public class DB {
 	public void commitTransaction(){
 		try {
 			this.connection.commit();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {

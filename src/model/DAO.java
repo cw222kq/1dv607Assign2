@@ -147,10 +147,10 @@ public class DAO {
 		return rs;
 	}
 	// Look at a specific members information
-	public ResultSet getMemberInformation(String SSN){
+	public ResultSet getMemberAndBoatsInformation(String SSN) {
 		rs = null;
 		try {
-			rs =statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Member.password AS 'member password', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN = " + "'" + SSN + "'" ); 
+			rs =statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Member.password AS 'member password', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN = " + "'" + SSN + "'" );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -158,14 +158,17 @@ public class DAO {
 	}
 	// Change membersInformation 
 	// Getting the members information from the ssn
-	public ResultSet getMembersInformation(model.Member m_member){
+	public ResultSet getMembersInformation(model.Member m_member) {
 		rs = null;
 		try {
 			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + m_member.getSSN()+ "'" );  
+			if(rs.isClosed()){
+				return null;
+			}
 			m_member.setId(rs.getInt("member id"));
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
+			e.printStackTrace(); 
+		} 	
 		return rs;
 	}
 	// Delete a member
@@ -193,7 +196,7 @@ public class DAO {
 			e.printStackTrace();
 		} 
 		return rs;		
-	}
+	}	
 	// Getting a specific boat
 	public ResultSet getASpecificBoat(int id){
 		rs = null;

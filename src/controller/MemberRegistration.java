@@ -3,6 +3,7 @@
  */
 package controller;
 
+
 /**
  * @author cw222kq
  *
@@ -24,7 +25,7 @@ public class MemberRegistration {
 					a_view.printHeadlineCreateNewMember();
 					a_view.printCreateNewMemberMenu(a_member);
 					
-					// Inserting the member in the member table in the db NY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					// Inserting the member in the member table in the db
 					a_dao.startTransaction();
 					a_dao.insert(a_member, a_boat, "member");
 					a_dao.commitTransaction();
@@ -55,21 +56,26 @@ public class MemberRegistration {
 					a_dao.commitTransaction();
 				
 				}
-				// 5. Change members information /// JOBBA HÄR !!!!!!!!!!!!!
+				// 5. Change members information 
 				else if(a_view.getInChar() == '5'){
 					
 					a_view.printHeadlineChangeMembersInformation();
 					// printing the current member information on the specific member from the db
 					a_view.printLookAtMembersInformationMenu(a_member);
-					a_view.printMembersInformation(a_dao.getMembersInformation(a_member));
+					if(a_dao.getMembersInformation(a_member) == null){
+						a_view.printErrorMessageUserIsNotInDB();
+					}
+					else {
+						a_view.printMembersInformation(a_dao.getMembersInformation(a_member));
 					
-					// printing out the menu for changing the specific member and setting the new values
-					a_view.printChangeMembersInformationMenu(a_member);
-					
-					// updating the information about the member in the db 
-					a_dao.startTransaction();
-					a_dao.updateMemberInformation(a_member);
-					a_dao.commitTransaction();
+						// printing out the menu for changing the specific member and setting the new values
+						a_view.printChangeMembersInformationMenu(a_member);
+						
+						// updating the information about the member in the db 
+						a_dao.startTransaction();
+						a_dao.updateMemberInformation(a_member);
+						a_dao.commitTransaction();
+					}
 				
 				}
 				// 6. View members information
@@ -80,7 +86,7 @@ public class MemberRegistration {
 					a_view.printLookAtMembersInformationMenu(a_member);
 					
 					// printing out the specific members information
-					a_view.printWholeMembersInformation(a_dao.getMemberInformation(a_member.getSSN()));
+					a_view.printWholeMembersInformation(a_dao.getMemberAndBoatsInformation(a_member.getSSN()));
 				
 				}
 				// 7. Register a new boat
@@ -123,7 +129,7 @@ public class MemberRegistration {
 					a_dao.commitTransaction();
 				
 				}
-				// 9. Change boats information /// JOBBA HÄR !!!!!!!!!!!!!!
+				// 9. Change boats information 
 				else if(a_view.getInChar() == '9'){
 					
 					a_view.printHeadlineChangeABoatsInforamtion();
@@ -136,18 +142,18 @@ public class MemberRegistration {
 					// Choose the specific boat to modify from the member
 					a_view.printChangeBoatInformationMenuChooseBoat(a_boat);
 					a_view.printASpecificBoat(a_dao.getASpecificBoat(a_boat.getId()));
-					
+							
 					// printing out the menu for changing the specific boat and setting the new values
 					a_view.printChangeBoatsInformationMenu(a_member, a_boat); 
-					
+						
 					// updating the information about the boat in the db 
 					a_dao.startTransaction();
 					a_dao.updateBoatInformation(a_boat);
-					a_dao.commitTransaction();
-				
+					a_dao.commitTransaction();	
+						
 				}
 				// If the user inputs a value that don't exists
-				else {System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");} // gör en metod som skriver ut detta i console klassen
+				else {a_view.printErrorMessageWrongChoice();}
 				a_view.printMainMenu();
 			}
 			// If the user choose Q ends the while loop and the application quits
