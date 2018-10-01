@@ -140,7 +140,7 @@ public class Console {
 		System.out.println("Input the type of the boat");
 		a_boat.setType(getUsersInputStringTwoWords());
 		
-		System.out.println("Input the path to the image of the boat(optional, possible to leave empty)");
+		System.out.println("Input the path to the image of the boat");
 		a_boat.setImagePath(getUsersInputStringOneWord());
 			
 	}
@@ -174,7 +174,7 @@ public class Console {
 		System.out.println("Input the new type of the boat");
 		a_boat.setType(getUsersInputStringTwoWords());
 		
-		System.out.println("Input the new path to the image of the boat(optional, possible to leave empty)");
+		System.out.println("Input the new path to the image of the boat");
 		a_boat.setImagePath(getUsersInputStringOneWord());
 		
 	}

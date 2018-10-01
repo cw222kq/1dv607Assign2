@@ -60,6 +60,7 @@ public class MemberRegistration {
 				else if(a_view.getInChar() == '5'){
 					
 					a_view.printHeadlineChangeMembersInformation();
+					
 					// printing the current member information on the specific member from the db
 					a_view.printLookAtMembersInformationMenu(a_member);
 					if(a_dao.getMembersInformation(a_member) == null){
