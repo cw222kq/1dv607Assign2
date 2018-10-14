@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @author cw222kq
  *
  */
-public class DAO {
+class DAO {
 
 	/**
 	 * 

@@ -7,7 +7,7 @@ package model;
  * @author cw222kq
  *
  */
-public class Boat {
+class Boat {
 
 	// create variables
 	private int id;

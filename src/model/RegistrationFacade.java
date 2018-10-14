@@ -62,7 +62,7 @@ public class RegistrationFacade {
 	public void setBoatSize(int valueSize){
 		m_boat.setSize(valueSize);
 	}
-	public void setType(String valueType){
+	public void setBoatType(String valueType){
 		m_boat.setType(valueType);
 	}
 	public void setImagePath(String valueImagePath){

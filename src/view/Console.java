@@ -87,95 +87,95 @@ public class Console {
 	}
 	// ******** SUBMENUS TO THE MAIN MENU member ********
 	// create new member menu
-	public void printCreateNewMemberMenu(model.Member a_member){
+	public void printCreateNewMemberMenu(model.RegistrationFacade a_registrationFacade){
 
 		System.out.println("Input members social security number(yymmddxxxx)");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 		
 		System.out.println("Input members name(first and lastname)");
-		a_member.setName(getUsersInputStringTwoWords());
+		a_registrationFacade.setMemberName(getUsersInputStringTwoWords());
 		
 		System.out.println("Input members password(no line feeds allowed)");
-		a_member.setPassword(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
 		
 	}
 	// delete a member menu
-	public void printDeleteAMemberMenu(model.Member a_member){
+	public void printDeleteAMemberMenu(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 		
 	}
 	// change members information menu
-	public void printChangeMembersInformationMenu(model.Member a_member){
+	public void printChangeMembersInformationMenu(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Make the wanted changes.");
 		System.out.println("Input the new social security number(yymmddxxxx)");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 		
 		System.out.println("Input the new name");
-		a_member.setName(getUsersInputStringTwoWords());
+		a_registrationFacade.setMemberName(getUsersInputStringTwoWords());
 		
 		System.out.println("Input the new password");
-		a_member.setPassword(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
 		
 	}
 	// look at members information menu
-	public void printLookAtMembersInformationMenu(model.Member a_member){
+	public void printLookAtMembersInformationMenu(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the specific member");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 			
 	}
 	// ******** SUBMENUS TO THE MAIN MENU boat ********
 	// register a new boat
-	public void printRegisterANewBoatMenu(model.Member a_member, model.Boat a_boat){
+	public void printRegisterANewBoatMenu(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to register a new boat for");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 		
 		System.out.println("Input the size of the boat");
-		a_boat.setSize(getUsersInputInteger());
+		a_registrationFacade.setBoatSize(getUsersInputInteger());
 		
 		System.out.println("Input the type of the boat");
-		a_boat.setType(getUsersInputStringTwoWords());
+		a_registrationFacade.setBoatType(getUsersInputStringTwoWords());
 		
 		System.out.println("Input the path to the image of the boat");
-		a_boat.setImagePath(getUsersInputStringOneWord());
+		a_registrationFacade.setImagePath(getUsersInputStringOneWord());
 			
 	}
 	// delete a boat methods
 	// Choosing member to delete a boat from
-	public void printDeleteABoatMenuChooseMember(model.Member a_member){
+	public void printDeleteABoatMenuChooseMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete a boat from");
-		a_member.setSSN(getUsersInputStringOneWord());
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 	}
 	// Choosing the specific boat to delete
-	public void printDeleteABoatMenuChooseBoat(model.Boat a_boat){
+	public void printDeleteABoatMenuChooseBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the id for the boat you with to delete");
-		a_boat.setId(getUsersInputInteger());	
+		a_registrationFacade.setBoatId(getUsersInputInteger());	
 	}
 	// change boat information methods
 	// Selects which boat to change 
-	public void printChangeBoatInformationMenuChooseBoat(model.Boat a_boat){
+	public void printChangeBoatInformationMenuChooseBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the id for the boat you with to change");
-		a_boat.setId(getUsersInputInteger());	
+		a_registrationFacade.setBoatId(getUsersInputInteger());	
 	}
 	// changing the selected boats information
-	public void printChangeBoatsInformationMenu(model.Member a_member, model.Boat a_boat){
+	public void printChangeBoatsInformationMenu(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the new size of the boat");
-		a_boat.setSize(getUsersInputInteger());
+		a_registrationFacade.setBoatSize(getUsersInputInteger());
 		
 		System.out.println("Input the new type of the boat");
-		a_boat.setType(getUsersInputStringTwoWords());
+		a_registrationFacade.setBoatType(getUsersInputStringTwoWords());
 		
 		System.out.println("Input the new path to the image of the boat");
-		a_boat.setImagePath(getUsersInputStringOneWord());
+		a_registrationFacade.setImagePath(getUsersInputStringOneWord());
 		
 	}
 	// ******** RESULTSET METHODS GETTING THE DATA FROM THE DATABASE *********
