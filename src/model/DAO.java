@@ -19,7 +19,7 @@ public class DAO {
 	 * 
 	 */
 	public DAO() {
-		connect = s_db.getConnection();
+		connect = m_db.getConnection();
 		try {
 			statement = connect.createStatement();
 		} catch (SQLException e) {
@@ -37,7 +37,7 @@ public class DAO {
 	private Statement statement;
 	private Statement state;
 	private ResultSet rs;
-	private DB s_db = new DB();
+	private DB m_db = new DB();
 	
 	// INPUT VALUES INTO THE TABLES
 	// Inserts data into the different tables that is in the db
@@ -45,13 +45,11 @@ public class DAO {
 		try{
 			// member
 			if(table == "member"){
-				//if(isInTheDB) {return;}
 				if(m_member.getName() == null){return;}
 				statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + m_member.getSSN() + "'" +  ", '" + m_member.getName() + "'" +  ", '" + m_member.getPassword() + "'" + ")");
 			}
 			// boat
 			if(table == "boat"){
-				//if(isInTheDB) {return;}
 				if(m_boat.getType() == null){return;}
 				statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + m_boat.getSize() + "'" + ", '" + m_boat.getType() + "'" + ", '" + m_member.getId() + "'" + ")");
 			}
@@ -64,9 +62,9 @@ public class DAO {
 		}catch(Exception e){
 			e.printStackTrace();	
 		}
-		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS
+		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS !!!!!!!!!!!!!!!
 	}
-	private void createTables(){
+	private void createTables(){ // ska ligga kvar här anropas i konstruktorn
 		// create tables if they not already exists
 		try {
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Member(id INTEGER PRIMARY KEY AUTOINCREMENT, SSN TEXT NOT NULL, name TEXT NOT NULL, password TEXT NOT NULL)");
@@ -225,13 +223,13 @@ public class DAO {
 		} 	
 	}
 	public void startTransaction(){
-		s_db.startTransaction();
+		m_db.startTransaction();
 	}
 	public void commitTransaction(){
-		s_db.commitTransaction();
+		m_db.commitTransaction();
 	}
 	public void closeConnection(){
-		s_db.closeConnection();
+		m_db.closeConnection();
 	}
 
 }
