@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Console {
 	
-	public Console(){printWelcomeMessage();}
+	public Console(){printWelcome();}
 	
 	private Scanner scan;
 	private Scanner scanner;
@@ -22,16 +22,20 @@ public class Console {
 	public void emptyInChar(){
 		this.inChar = '0';
 	}
+	
 	public char getInChar(){
 		return this.inChar;
 	}
+	
 	public boolean wantsToQuit(){
 		return getUsersInputChar() == 'Q';
 	}
+	
 	public void quit(){
 		System.out.println("Quitting the application!");
 		System.exit(0);
 	}
+	
 	// print out main menu
 	public void printMainMenu(){
 		
@@ -50,6 +54,7 @@ public class Console {
 		System.out.println("");
 		System.out.println("<Q> QUIT");
 	}
+	
 	// ******** METHODS WHO GETS THE USERS INPUT *********
 	// Get the input value from the keyboard. Written with inspiration from: https://stackoverflow.com/questions/15446689/what-is-the-use-of-system-in-read
 	public char getUsersInputChar() {
@@ -67,27 +72,31 @@ public class Console {
 	      return 0;
 	    }
 	}
+	
 	// Get the string input value from the keyboard when it's only one word
 	private String getUsersInputStringOneWord() {
 		scanner = new Scanner(System.in);
 		String inValue = scanner.next();
 		return inValue;
 	}
+	
 	// Get the string input value from the keyboard when it's more than one word
 	private String getUsersInputStringTwoWords() {
 		scanner = new Scanner(System.in);
 		String inValue = scanner.nextLine();
 		return inValue;
 	}
+	
 	// Get the integer input value from the keyboard
 	private int getUsersInputInteger() {
 		scan = new Scanner(System.in);
 		int inValue = scan.nextInt();
 		return inValue;
 	}
+	
 	// ******** SUBMENUS TO THE MAIN MENU member ********
 	// create new member menu
-	public void printCreateNewMemberMenu(model.RegistrationFacade a_registrationFacade){
+	public void printCreateMember(model.RegistrationFacade a_registrationFacade){
 
 		System.out.println("Input members social security number(yymmddxxxx)");
 		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
@@ -99,15 +108,17 @@ public class Console {
 		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
 		
 	}
+	
 	// delete a member menu
-	public void printDeleteAMemberMenu(model.RegistrationFacade a_registrationFacade){
+	public void printDeleteMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete");
 		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 		
 	}
+	
 	// change members information menu
-	public void printChangeMembersInformationMenu(model.RegistrationFacade a_registrationFacade){
+	public void printChangeMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Make the wanted changes.");
 		System.out.println("Input the new social security number(yymmddxxxx)");
@@ -120,16 +131,18 @@ public class Console {
 		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
 		
 	}
+	
 	// look at members information menu
-	public void printLookAtMembersInformationMenu(model.RegistrationFacade a_registrationFacade){
+	public void printLookAtMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the specific member");
 		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 			
 	}
+	
 	// ******** SUBMENUS TO THE MAIN MENU boat ********
 	// register a new boat
-	public void printRegisterANewBoatMenu(model.RegistrationFacade a_registrationFacade){
+	public void printRegisterBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to register a new boat for");
 		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
@@ -144,28 +157,32 @@ public class Console {
 		a_registrationFacade.setImagePath(getUsersInputStringOneWord());
 			
 	}
+	
 	// delete a boat methods
 	// Choosing member to delete a boat from
-	public void printDeleteABoatMenuChooseMember(model.RegistrationFacade a_registrationFacade){
+	public void printChooseMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete a boat from");
 		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
 	}
+	
 	// Choosing the specific boat to delete
-	public void printDeleteABoatMenuChooseBoat(model.RegistrationFacade a_registrationFacade){
+	public void printDeleteBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the id for the boat you with to delete");
 		a_registrationFacade.setBoatId(getUsersInputInteger());	
 	}
+	
 	// change boat information methods
 	// Selects which boat to change 
-	public void printChangeBoatInformationMenuChooseBoat(model.RegistrationFacade a_registrationFacade){
+	public void printSelectBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the id for the boat you with to change");
 		a_registrationFacade.setBoatId(getUsersInputInteger());	
 	}
+	
 	// changing the selected boats information
-	public void printChangeBoatsInformationMenu(model.RegistrationFacade a_registrationFacade){
+	public void printChangeBoat(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
 		System.out.println("Input the new size of the boat");
@@ -178,6 +195,7 @@ public class Console {
 		a_registrationFacade.setImagePath(getUsersInputStringOneWord());
 		
 	}
+	
 	// ******** RESULTSET METHODS GETTING THE DATA FROM THE DATABASE *********
 	// list member as compact list
 	public void printCompactList(ResultSet r){
@@ -189,6 +207,7 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	
 	// list member as verbose list
 	public void printVerboseList(ResultSet r){
 		try {
@@ -199,8 +218,9 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	
 	// prints the whole member information (i.e from all the tables: member, boat, image)
-	public void printWholeMembersInformation(ResultSet r){
+	public void printMembersAllInformation(ResultSet r){
 		try {
 			while(r.next()){
 				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")  + ", Member password: " + r.getString("member password") + ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
@@ -209,8 +229,9 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	
 	// prints all boats owned of a specific member
-	public void printAllMembersBoats(ResultSet r){
+	public void printMembersBoats(ResultSet r){
 		try {
 			while(r.next()){
 				System.out.println("Boat id: " + r.getInt("id") + ", Size: " + r.getInt("size") + ", Type: " + r.getString("type") + ", Image path: " + r.getString("path"));
@@ -219,8 +240,9 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	
 	// print all information about the member (i.e all the data in the member table)
-	public void printMembersInformation(ResultSet r){
+	public void printMember(ResultSet r){
 		if(r == null){System.out.println("null"); 
 			return;
 		}
@@ -233,8 +255,8 @@ public class Console {
 		}
 		
 	}
-	// prints a specific boat
-	public void printASpecificBoat(ResultSet r){
+	
+	public void printBoat(ResultSet r){
 		try {
 			while(r.next()){
 				System.out.println("Boat id: " + r.getInt("id") + ", Boat size: " + r.getString("size") + ", Boat type: " + r.getString("type") + ", Image path: " + r.getString("path"));
@@ -243,43 +265,65 @@ public class Console {
 			e.printStackTrace();
 		}
 	}
+	
 	//  ******** HEADLINES  *********
-	// prints out the headlines for the submenus
-	public void printHeadlineCreateNewMember(){
+	public void printHeadingCreateMember(){
 		System.out.println("1. CREATE NEW MEMBER");
 	}
-	public void printHeadlineCompactList() {
+	
+	public void printHeadingCompactList() {
 		System.out.println("2. COMPACT LIST");
 	}
-	public void printHeadlineVerboseList() {
+	
+	public void printHeadingVerboseList() {
 		System.out.println("3. VERBOSE LIST");
 	}
-	public void printHeadlineDeleteAMember() {
+	
+	public void printHeadingDeleteMember() {
 		System.out.println("4. DELETE A MEMBER");
 	}
-	public void printHeadlineChangeMembersInformation() {
+	
+	public void printHeadingChangeMember() {
 		System.out.println("5. CHANGE MEMBERS INFORMATION");
 	}
-	public void printHeadlineLookAtASpecificMembersInformation() {
+	
+	public void printHeadingLookAtMember() {
 		System.out.println("6. LOOK AT A SPECIFIC MEMBER INFORMATION");
 	}
-	public void printHeadlineRegisterANewBoat() {
+	
+	public void printHeadingRegisterBoat() {
 		System.out.println("7. REGISTER A NEW BOAT");
 	}
-	public void printHeadlineDeleteABoat() {
+	
+	public void printHeadingDeleteBoat() {
 		System.out.println("8. DELETE A BOAT");
 	}
-	public void printHeadlineChangeABoatsInforamtion() {
+	
+	public void printHeadingChangeBoat() {
 		System.out.println("9. CHANGE A BOATS INFORMATION");
 	}
-	private void printWelcomeMessage(){
+	
+	//  ******** WELCOME MESSAGE  *********
+	private void printWelcome(){
 		System.out.println("**** Welcome to The Jolly Pirate ****");
 	}
-	public void printErrorMessageWrongChoice(){
+	
+	//  ******** ERROR MESSAGE  *********
+	public void printErrorChoice(){
 		System.out.println("There is no event on this choice please choose again! Make your selection from the menu!");
 	}
-	public void printErrorMessageUserIsNotInDB(){
+	
+	public void printErrorUser(){
 		System.out.println("The user is not in the database. Please add the user first");
+	}
+	
+	//  ******** SUCCESS MESSAGE  *********
+	public void printSuccededInsert(){
+		System.out.println("The data has been saved");
+	}
+	
+	public void printSuccededDelete(){
+		System.out.println("The data has been deleted");
 	}
 
 }

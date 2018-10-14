@@ -20,6 +20,7 @@ public class DB {
 	public DB() {
 		this.connection = null;
 	}
+	
 	public Connection getConnection() {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -46,6 +47,7 @@ public class DB {
 		
 		return this.connection;
 	}
+	
 	private void setConfig(){
 		
 		org.sqlite.SQLiteConfig config = new org.sqlite.SQLiteConfig();
@@ -57,6 +59,7 @@ public class DB {
 		}
 
 	}
+	
 	// Start transaction
 	public void startTransaction(){
 		try {
@@ -65,6 +68,7 @@ public class DB {
 			e.printStackTrace();
 		}	
 	}
+	
 	// Commit transaction
 	public void commitTransaction(){
 		try {
@@ -78,6 +82,7 @@ public class DB {
 			}
 		} 
 	}
+	
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		try {

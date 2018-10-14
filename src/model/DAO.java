@@ -40,32 +40,23 @@ class DAO {
 	private DB m_db = new DB();
 	
 	// INPUT VALUES INTO THE TABLES
-	// Inserts data into the different tables that is in the db
-	public void insert(model.Member m_member, model.Boat m_boat, String table){ 
-		try{
-			// member
-			if(table == "member"){
-				if(m_member.getName() == null){return;}
-				statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + m_member.getSSN() + "'" +  ", '" + m_member.getName() + "'" +  ", '" + m_member.getPassword() + "'" + ")");
-			}
-			// boat
-			if(table == "boat"){
-				if(m_boat.getType() == null){return;}
-				statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + m_boat.getSize() + "'" + ", '" + m_boat.getType() + "'" + ", '" + m_member.getId() + "'" + ")");
-			}
-			// image
-			if(table == "image"){
-				if(m_boat.getImagePath() == null){return;}
-				statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + m_boat.getImagePath() + "'" + ", " + m_boat.getId() + ")" );
-			}
-		
-		}catch(Exception e){
-			e.printStackTrace();	
-		}
-		// METOD SOM SÄGER ATT COMMMITEN LYCKADES BEHÖVS !!!!!!!!!!!!!!!
+	public void insertMember(model.Member a_member) throws SQLException{
+		if(a_member.getName() == null){return;}
+		statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + a_member.getSSN() + "'" +  ", '" + a_member.getName() + "'" +  ", '" + a_member.getPassword() + "'" + ")");
 	}
-	private void createTables(){ // ska ligga kvar här anropas i konstruktorn
-		// create tables if they not already exists
+	
+	public void insertBoat(model.Boat a_boat, model.Member a_member) throws SQLException{
+		if(a_boat.getType() == null){return;}
+		statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + a_boat.getSize() + "'" + ", '" + a_boat.getType() + "'" + ", '" + a_member.getId() + "'" + ")");
+	}
+	
+	public void insertImage(model.Boat a_boat) throws SQLException{
+		if(a_boat.getImagePath() == null){return;}
+		statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + a_boat.getImagePath() + "'" + ", " + a_boat.getId() + ")" );
+	}
+	
+	private void createTables(){
+	
 		try {
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS Member(id INTEGER PRIMARY KEY AUTOINCREMENT, SSN TEXT NOT NULL, name TEXT NOT NULL, password TEXT NOT NULL)");
 		} catch (SQLException e) {
@@ -82,6 +73,7 @@ class DAO {
 			e.printStackTrace();
 		}	
 	}
+	
 	// FETCH DATA FROM DB TO SUPPORT THE INSERT METODS
 	// Method that returns the member id from the social security number
 	public int getMemberId(String SSN) { 
@@ -103,6 +95,7 @@ class DAO {
 		}
 		return id;		
 	}
+	
 	// Method that returns the latest added boats id of the specific member (used when the user put in values into the image table)
 	public int getMembersLatestAddedBoatId(int memberId){
 		rs = null;
@@ -123,6 +116,7 @@ class DAO {
 		}
 		return boatId;	
 	}
+	
 	// GETTING DATA FROM THE DB
 	// Get compact list (name, member id and number of boats of all members)
 	public ResultSet getCompactList() {
@@ -134,6 +128,7 @@ class DAO {
 		}
 		return rs;	
 	}
+	
 	// Get verbose list (name, SSN, member id and boats with boat information of all members)
 	public ResultSet getVerboseList() {
 		rs = null;
@@ -144,6 +139,7 @@ class DAO {
 		} 
 		return rs;
 	}
+	
 	// Look at a specific members information
 	public ResultSet getMemberAndBoatsInformation(String SSN) {
 		rs = null;
@@ -154,37 +150,33 @@ class DAO {
 		} 
 		return rs;		
 	}
+	
 	// Change membersInformation 
 	// Getting the members information from the ssn
-	public ResultSet getMembersInformation(model.Member m_member) {
+	public ResultSet getMembersInformation(model.Member a_member) {
 		rs = null;
 		try {
-			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + m_member.getSSN()+ "'" );  
+			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + a_member.getSSN()+ "'" );  
 			if(rs.isClosed()){
 				return null;
 			}
-			m_member.setId(rs.getInt("member id"));
+			a_member.setId(rs.getInt("member id"));
 		} catch (SQLException e) {
 			e.printStackTrace(); 
 		} 	
 		return rs;
 	}
+	
 	// Delete a member
-	public void deleteMember(String SSN){
-		try {
-			statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 		
+	public void deleteMember(String SSN) throws SQLException{
+		statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");		
 	}
+	
 	// Delete a boat
-	public void deleteBoat(int id){
-		try {
-			statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 		
+	public void deleteBoat(int id) throws SQLException{
+		statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);	
 	}
+	
 	// Getting the members boats from the db when the user input members SSN
 	public ResultSet getMembersBoats(String SSN){
 		rs = null;
@@ -195,6 +187,7 @@ class DAO {
 		} 
 		return rs;		
 	}	
+	
 	// Getting a specific boat
 	public ResultSet getASpecificBoat(int id){
 		rs = null;
@@ -205,29 +198,26 @@ class DAO {
 		} 
 		return rs;	
 	}
+	
 	// Update the members information
-	public void updateMemberInformation(model.Member m_member){
-		try {
-			statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + m_member.getSSN() + "', name =" + "'" + m_member.getName() + "', password =" + "'" + m_member.getPassword()+ "' WHERE id =" + m_member.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 	
+	public void updateMember(model.Member a_member) throws SQLException{
+		statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + a_member.getSSN() + "', name =" + "'" + a_member.getName() + "', password =" + "'" + a_member.getPassword()+ "' WHERE id =" + a_member.getId());	
 	}
+	
 	// Update the boats information
-	public void updateBoatInformation(model.Boat m_boat){
-		try {
-			statement.executeUpdate("UPDATE Boat SET size =" + m_boat.getSize() + ", type =" + "'" + m_boat.getType() + "' WHERE id=" + m_boat.getId());
-			state.executeUpdate("UPDATE Image SET path =" + "'" + m_boat.getImagePath()+ "' WHERE boat_id =" + m_boat.getId()); 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 	
+	public void updateBoat(model.Boat a_boat) throws SQLException{
+		statement.executeUpdate("UPDATE Boat SET size =" + a_boat.getSize() + ", type =" + "'" + a_boat.getType() + "' WHERE id=" + a_boat.getId());
+		state.executeUpdate("UPDATE Image SET path =" + "'" + a_boat.getImagePath()+ "' WHERE boat_id =" + a_boat.getId()); 
 	}
+	
 	public void startTransaction(){
 		m_db.startTransaction();
 	}
+	
 	public void commitTransaction(){
 		m_db.commitTransaction();
 	}
+	
 	public void closeConnection(){
 		m_db.closeConnection();
 	}
