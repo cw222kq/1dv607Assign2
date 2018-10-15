@@ -39,6 +39,7 @@ public class Console {
 	// print out main menu
 	public void printMainMenu(){
 		
+		System.out.println();
 		System.out.println("Please make your choice");
 		System.out.println("** MEMBER **");
 		System.out.println("<1> CREATE NEW MEMBER");
@@ -105,16 +106,14 @@ public class Console {
 		a_registrationFacade.setMemberName(getUsersInputStringTwoWords());
 		
 		System.out.println("Input members password(no line feeds allowed)");
-		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
-		
+		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());	
 	}
 	
 	// delete a member menu
 	public void printDeleteMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the member you want to delete");
-		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
-		
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());	
 	}
 	
 	// change members information menu
@@ -128,16 +127,14 @@ public class Console {
 		a_registrationFacade.setMemberName(getUsersInputStringTwoWords());
 		
 		System.out.println("Input the new password");
-		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());
-		
+		a_registrationFacade.setMemberPassword(getUsersInputStringOneWord());	
 	}
 	
 	// look at members information menu
 	public void printLookAtMember(model.RegistrationFacade a_registrationFacade){
 		
 		System.out.println("Input the social security number(yymmddxxxx) of the specific member");
-		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());
-			
+		a_registrationFacade.setMemberSSN(getUsersInputStringOneWord());		
 	}
 	
 	// ******** SUBMENUS TO THE MAIN MENU boat ********
@@ -208,28 +205,27 @@ public class Console {
 		}
 	}
 	
-	// list member as verbose list
-	public void printVerboseList(ResultSet r){
+	// used for list member as verbose list and view members information
+	public void printMembersInformation(ResultSet r){
+		int currentMemberID = 0;
 		try {
-			while(r.next()){
-				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")+ ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
+			while(r.next()){				
+				// check if the next row is a new member
+				if(r.getInt("member id") != currentMemberID){
+					System.out.println("\n" + "Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id"));
+					System.out.println("Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
+					currentMemberID = r.getInt("member id");
+				} 
+				// Otherwise print additional boats
+				else {
+					System.out.println("Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
+				}	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
-	
-	// prints the whole member information (i.e from all the tables: member, boat, image)
-	public void printMembersAllInformation(ResultSet r){
-		try {
-			while(r.next()){
-				System.out.println("Member name: " + r.getString("member name") + ", SSN: " + r.getString("social security number") + ", Member id: " + r.getInt("member id")  + ", Member password: " + r.getString("member password") + ", Boat id: " + r.getInt("boat id") + ", Boat size: " + r.getInt("boat size") + ", Boat type: " + r.getString("boat type")+ ", Image path: " + r.getString("image path"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	// prints all boats owned of a specific member
 	public void printMembersBoats(ResultSet r){
 		try {
@@ -252,8 +248,7 @@ public class Console {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public void printBoat(ResultSet r){
@@ -325,5 +320,4 @@ public class Console {
 	public void printSuccededDelete(){
 		System.out.println("The data has been deleted");
 	}
-
 }

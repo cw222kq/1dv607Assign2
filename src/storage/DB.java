@@ -44,7 +44,6 @@ public class DB {
 			e.printStackTrace();
 		}
 		setConfig();
-		
 		return this.connection;
 	}
 	
@@ -57,7 +56,6 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	public void startTransaction(){

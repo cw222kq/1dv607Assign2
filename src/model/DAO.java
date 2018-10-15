@@ -15,9 +15,6 @@ import java.sql.Statement;
  */
 class DAO {
 
-	/**
-	 * 
-	 */
 	public DAO() {
 		connect = m_db.getConnection();
 		try {
@@ -179,7 +176,6 @@ class DAO {
 		return rs;
 	}
 	
-	// Delete a member
 	public void deleteMember(String SSN){
 		try {
 			statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");
@@ -188,7 +184,6 @@ class DAO {
 		}		
 	}
 	
-	// Delete a boat
 	public void deleteBoat(int id){
 		try {
 			statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);
@@ -197,7 +192,6 @@ class DAO {
 		}	
 	}
 	
-	// Getting the members boats from the db when the user input members SSN
 	public ResultSet getMembersBoats(String SSN){
 		rs = null;
 		try {
@@ -208,7 +202,6 @@ class DAO {
 		return rs;		
 	}	
 	
-	// Getting a specific boat
 	public ResultSet getASpecificBoat(int id){
 		rs = null;
 		try {
@@ -219,7 +212,6 @@ class DAO {
 		return rs;	
 	}
 	
-	// Update the members information
 	public void updateMember(model.Member a_member){
 		try {
 			statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + a_member.getSSN() + "', name =" + "'" + a_member.getName() + "', password =" + "'" + a_member.getPassword()+ "' WHERE id =" + a_member.getId());
@@ -228,7 +220,6 @@ class DAO {
 		}	
 	}
 	
-	// Update the boats information
 	public void updateBoat(model.Boat a_boat){
 		try {
 			statement.executeUpdate("UPDATE Boat SET size =" + a_boat.getSize() + ", type =" + "'" + a_boat.getType() + "' WHERE id=" + a_boat.getId());
@@ -253,5 +244,4 @@ class DAO {
 	public void closeConnection(){
 		m_db.closeConnection();
 	}
-
 }

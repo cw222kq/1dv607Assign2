@@ -9,23 +9,14 @@ package model;
  */
 class Boat {
 
-	// create variables
 	private int id;
 	private int size;
 	private String type;
 	private String imagePath;
 	
-	// the constructor sets the variables (used when creating a new boat (auto increment id));
-	/*public Boat(int valueSize, String valueType, String valuePath) {
-		
-		this.size = valueSize;
-		this.type = valueType;
-		this.imagePath = valuePath;
-	}*/
-	
 	public Boat(){}
 	
-	// setters (used when updating the information about the boat)
+	// setters
 	public void setId(int valueId){
 		this.id = valueId;
 	}

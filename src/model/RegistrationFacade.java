@@ -168,5 +168,4 @@ public class RegistrationFacade {
 	public void closeConnection(){
 		m_dao.closeConnection();
 	}
-
 }

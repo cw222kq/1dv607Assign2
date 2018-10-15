@@ -11,9 +11,6 @@ import java.sql.SQLException;
  */
 public class MemberRegistration {
 
-	/**
-	 * 
-	 */
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 	// running the program as long as the user don't choose q in the menu
 	public void runMemberRegistration(view.Console a_view, model.RegistrationFacade a_registrationFacade){ 
@@ -41,15 +38,13 @@ public class MemberRegistration {
 			else if(a_view.getInChar() == '2'){
 				
 				a_view.printHeadingCompactList();
-				a_view.printCompactList(a_registrationFacade.getCompactList());
-				
+				a_view.printCompactList(a_registrationFacade.getCompactList());	
 			}
 			// 3. List all members as verbose list
 			else if(a_view.getInChar() == '3'){
 			
 				a_view.printHeadingVerboseList();
-				a_view.printVerboseList(a_registrationFacade.getVerboseList());
-	
+				a_view.printMembersInformation(a_registrationFacade.getVerboseList());
 			}
 			// 4. Delete a member
 			else if(a_view.getInChar() == '4'){
@@ -67,7 +62,6 @@ public class MemberRegistration {
 					e.printStackTrace();
 					a_registrationFacade.rollback();
 				}
-			
 			}
 			// 5. Change members information 
 			else if(a_view.getInChar() == '5'){
@@ -96,7 +90,6 @@ public class MemberRegistration {
 						a_registrationFacade.rollback();
 					}
 				}
-			
 			}
 			// 6. View members information
 			else if(a_view.getInChar() == '6'){
@@ -106,8 +99,7 @@ public class MemberRegistration {
 				a_view.printLookAtMember(a_registrationFacade);
 				
 				// printing out the specific members information
-				a_view.printMembersAllInformation(a_registrationFacade.getMemberAndBoatsInformation(a_registrationFacade.getMemberSSN()));
-			
+				a_view.printMembersInformation(a_registrationFacade.getMemberAndBoatsInformation(a_registrationFacade.getMemberSSN()));
 			}
 			// 7. Register a new boat
 			else if(a_view.getInChar() == '7'){
@@ -127,7 +119,6 @@ public class MemberRegistration {
 					e1.printStackTrace();
 					a_registrationFacade.rollback();
 				}
-				
 				// getting the boat id of the latest boat that the member has added (for setting the boat_id into the image table)
 				a_registrationFacade.setBoatId(a_registrationFacade.getMembersLatestAddedBoatId(a_registrationFacade.getMemberId()));
 				
@@ -165,8 +156,7 @@ public class MemberRegistration {
 				} catch (SQLException e) {
 					e.printStackTrace();
 					a_registrationFacade.rollback();
-				}
-			
+				}	
 			}
 			// 9. Change boats information 
 			else if(a_view.getInChar() == '9'){
