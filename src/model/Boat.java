@@ -16,12 +16,12 @@ class Boat {
 	private String imagePath;
 	
 	// the constructor sets the variables (used when creating a new boat (auto increment id));
-	public Boat(int valueSize, String valueType, String valuePath) {
+	/*public Boat(int valueSize, String valueType, String valuePath) {
 		
 		this.size = valueSize;
 		this.type = valueType;
 		this.imagePath = valuePath;
-	}
+	}*/
 	
 	public Boat(){}
 	

@@ -60,7 +60,6 @@ public class DB {
 
 	}
 	
-	// Start transaction
 	public void startTransaction(){
 		try {
 			this.connection.setAutoCommit(false);
@@ -69,20 +68,17 @@ public class DB {
 		}	
 	}
 	
-	// Commit transaction
-	public void commitTransaction(){
-		try {
-			this.connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				this.connection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		} 
+	public void commitTransaction() throws SQLException{
+		this.connection.commit();
 	}
 	
+	public void rollback(){
+		try {
+			this.connection.rollback();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		try {

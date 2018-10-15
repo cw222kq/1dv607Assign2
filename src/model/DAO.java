@@ -40,19 +40,31 @@ class DAO {
 	private DB m_db = new DB();
 	
 	// INPUT VALUES INTO THE TABLES
-	public void insertMember(model.Member a_member) throws SQLException{
+	public void insertMember(model.Member a_member){
 		if(a_member.getName() == null){return;}
-		statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + a_member.getSSN() + "'" +  ", '" + a_member.getName() + "'" +  ", '" + a_member.getPassword() + "'" + ")");
+		try {
+			statement.executeUpdate("INSERT INTO Member(SSN,name,password)VALUES(" + "'" + a_member.getSSN() + "'" +  ", '" + a_member.getName() + "'" +  ", '" + a_member.getPassword() + "'" + ")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void insertBoat(model.Boat a_boat, model.Member a_member) throws SQLException{
+	public void insertBoat(model.Boat a_boat, model.Member a_member){
 		if(a_boat.getType() == null){return;}
-		statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + a_boat.getSize() + "'" + ", '" + a_boat.getType() + "'" + ", '" + a_member.getId() + "'" + ")");
+		try {
+			statement.executeUpdate("INSERT INTO Boat(size,type, member_id) VALUES(" + "'" + a_boat.getSize() + "'" + ", '" + a_boat.getType() + "'" + ", '" + a_member.getId() + "'" + ")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void insertImage(model.Boat a_boat) throws SQLException{
+	public void insertImage(model.Boat a_boat){
 		if(a_boat.getImagePath() == null){return;}
-		statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + a_boat.getImagePath() + "'" + ", " + a_boat.getId() + ")" );
+		try {
+			statement.executeUpdate("INSERT INTO Image(path, boat_id) VALUES(" + "'" + a_boat.getImagePath() + "'" + ", " + a_boat.getId() + ")" );
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void createTables(){
@@ -168,13 +180,21 @@ class DAO {
 	}
 	
 	// Delete a member
-	public void deleteMember(String SSN) throws SQLException{
-		statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");		
+	public void deleteMember(String SSN){
+		try {
+			statement.executeUpdate("DELETE FROM Member WHERE SSN =" + "'" + SSN + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	// Delete a boat
-	public void deleteBoat(int id) throws SQLException{
-		statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);	
+	public void deleteBoat(int id){
+		try {
+			statement.executeUpdate("DELETE FROM Boat WHERE id =" + id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	// Getting the members boats from the db when the user input members SSN
@@ -200,22 +220,34 @@ class DAO {
 	}
 	
 	// Update the members information
-	public void updateMember(model.Member a_member) throws SQLException{
-		statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + a_member.getSSN() + "', name =" + "'" + a_member.getName() + "', password =" + "'" + a_member.getPassword()+ "' WHERE id =" + a_member.getId());	
+	public void updateMember(model.Member a_member){
+		try {
+			statement.executeUpdate("UPDATE Member SET SSN ="+ "'" + a_member.getSSN() + "', name =" + "'" + a_member.getName() + "', password =" + "'" + a_member.getPassword()+ "' WHERE id =" + a_member.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	// Update the boats information
-	public void updateBoat(model.Boat a_boat) throws SQLException{
-		statement.executeUpdate("UPDATE Boat SET size =" + a_boat.getSize() + ", type =" + "'" + a_boat.getType() + "' WHERE id=" + a_boat.getId());
-		state.executeUpdate("UPDATE Image SET path =" + "'" + a_boat.getImagePath()+ "' WHERE boat_id =" + a_boat.getId()); 
+	public void updateBoat(model.Boat a_boat){
+		try {
+			statement.executeUpdate("UPDATE Boat SET size =" + a_boat.getSize() + ", type =" + "'" + a_boat.getType() + "' WHERE id=" + a_boat.getId());
+			state.executeUpdate("UPDATE Image SET path =" + "'" + a_boat.getImagePath()+ "' WHERE boat_id =" + a_boat.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	 
 	}
 	
 	public void startTransaction(){
 		m_db.startTransaction();
 	}
 	
-	public void commitTransaction(){
+	public void commitTransaction() throws SQLException{
 		m_db.commitTransaction();
+	}
+	
+	public void rollback(){
+		m_db.rollback();
 	}
 	
 	public void closeConnection(){

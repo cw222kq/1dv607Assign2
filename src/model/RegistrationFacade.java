@@ -93,15 +93,15 @@ public class RegistrationFacade {
 	}
 	
 	// DAO METHODS
-	public void insertMember() throws SQLException{
+	public void insertMember(){
 		m_dao.insertMember(m_member);
 	}
 	
-	public void insertBoat() throws SQLException{
+	public void insertBoat(){
 		m_dao.insertBoat(m_boat, m_member);
 	}
 	
-	public void insertImage() throws SQLException{
+	public void insertImage(){
 		m_dao.insertImage(m_boat);
 	}
 	
@@ -129,11 +129,11 @@ public class RegistrationFacade {
 		return m_dao.getMembersInformation(m_member);
 	}
 	
-	public void deleteMember(String SSN) throws SQLException{
+	public void deleteMember(String SSN){
 		m_dao.deleteMember(SSN);
 	}
 	
-	public void deleteBoat(int id) throws SQLException{
+	public void deleteBoat(int id){
 		m_dao.deleteBoat(id);	
 	}
 	
@@ -145,11 +145,11 @@ public class RegistrationFacade {
 		return m_dao.getASpecificBoat(id);
 	}
 	
-	public void updateMember() throws SQLException{
+	public void updateMember(){
 		m_dao.updateMember(m_member);
 	}
 	
-	public void updateBoat() throws SQLException{
+	public void updateBoat(){
 		m_dao.updateBoat(m_boat);
 	}
 	
@@ -157,8 +157,12 @@ public class RegistrationFacade {
 		m_dao.startTransaction();
 	}
 	
-	public void commitTransaction(){
+	public void commitTransaction() throws SQLException{
 		m_dao.commitTransaction();
+	}
+	
+	public void rollback(){
+		m_dao.rollback();
 	}
 	
 	public void closeConnection(){

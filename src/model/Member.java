@@ -16,11 +16,11 @@ class Member {
 	private String password;
 	
 	// the constructor sets the variables (used when creating a new member)
-	public Member(String valueSSN, String valueName, String valuePassword) {
+	/*public Member(String valueSSN, String valueName, String valuePassword) {
 		this.SSN = valueSSN;
 		this.name = valueName;
 		this.password = valuePassword;
-	}
+	}*/
 	
 	public Member(){}
 	// setters (used when updating the information about the member)

@@ -177,14 +177,14 @@ public class Console {
 	// Selects which boat to change 
 	public void printSelectBoat(model.RegistrationFacade a_registrationFacade){
 		
-		System.out.println("Input the id for the boat you with to change");
+		System.out.println("Input the id for the boat you wish to change");
 		a_registrationFacade.setBoatId(getUsersInputInteger());	
 	}
 	
 	// changing the selected boats information
 	public void printChangeBoat(model.RegistrationFacade a_registrationFacade){
 		
-		System.out.println("Make the wanted changes. If you don't want to change the value just press enter and the old value remains");
+		System.out.println("Make the wanted changes.");
 		System.out.println("Input the new size of the boat");
 		a_registrationFacade.setBoatSize(getUsersInputInteger());
 		
