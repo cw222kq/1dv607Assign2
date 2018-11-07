@@ -5,6 +5,7 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @author cw222kq
@@ -16,13 +17,40 @@ public class RegistrationFacade {
 	private Boat m_boat;
 	private DAO m_dao;
 	
+	//tillagt nu i kompletteringen	OSÄKER OM DENNA SKA LIGGA HÄR ELLER I DAO
+	//private ArrayList<Member> listOfMembers;
+			
+	//////////////////////////////////////
+	
 	public RegistrationFacade() {
 		
 		m_member = new Member();
 		m_boat = new Boat();
 		m_dao = new DAO();
+		
+		//tillagt nu i kompleteringen
+		//listOfMembers = new ArrayList<Member>();
 	}
+	//tillagt nu i kompletteringen
+	/*public void addMemberToList(Member a_member){
+		listOfMembers.add(a_member);
+	}
+	public void removeAllMembersFromList(){
+		listOfMembers.clear();
+	}
+	public Iterable<Member> getMembers(){
+		return listOfMembers;
+	}*/
+	//////////////////////////////////////
 	// MEMBER METHODS	
+	public Object getMember(){
+		return this.m_member;
+	}
+	//tillagt nu i kompletteringen 
+	public void addBoat(int id, int size, String type, String imagePath){
+		m_member.addBoat(id, size, type, imagePath);
+	}
+	//////////////////////////////////////
 	// setters
 	public void setMemberId(int valueId){
 		m_member.setId(valueId);
@@ -58,6 +86,9 @@ public class RegistrationFacade {
 	}
 	
 	// BOAT METHODS
+	public Boat getBoat(){
+		return m_boat;
+	}
 	// setters
 	public void setBoatId(int valueId){
 		m_boat.setId(valueId);
@@ -113,20 +144,32 @@ public class RegistrationFacade {
 		return m_dao.getMembersLatestAddedBoatId(memberId);
 	}
 	
-	public ResultSet getCompactList() {
+	/*public ResultSet getCompactList() {
+		return m_dao.getCompactList();	RADERA
+	}*/
+	//tillagt nu i kompletteringen
+	public ArrayList<Member> getCompactList() {
 		return m_dao.getCompactList();
 	}
 	
-	public ResultSet getVerboseList() {
+	/*public ResultSet getVerboseList() {
+		return m_dao.getVerboseList();
+	}*/
+	
+	public ArrayList getVerboseList() {
 		return m_dao.getVerboseList();
 	}
 	
-	public ResultSet getMemberAndBoatsInformation(String SSN) {
-		return m_dao.getMemberAndBoatsInformation(SSN);	
+	public ArrayList getMemberAndBoatsInformation(String SSN) {	//Ändrad från resultset till arraylist i returntyp
+		return m_dao.getMemberAndBoatsInformationTest(SSN);	
 	}
 	
 	public ResultSet getMembersInformation() {
 		return m_dao.getMembersInformation(m_member);
+	}
+	
+	public ArrayList getMembersInformationTest() {
+		return m_dao.getMembersInformationTest(m_member);
 	}
 	
 	public void deleteMember(String SSN){
@@ -141,8 +184,16 @@ public class RegistrationFacade {
 		return m_dao.getMembersBoats(SSN);	
 	}
 	
+	public ArrayList getMembersBoatsTest(String SSN){
+		return m_dao.getMembersBoatsTest(SSN);	
+	}
+	
 	public ResultSet getASpecificBoat(int id){
 		return m_dao.getASpecificBoat(id);
+	}
+	
+	public ArrayList getASpecificBoatTest(int id){
+		return m_dao.getASpecificBoatTest(id);
 	}
 	
 	public void updateMember(){
@@ -167,5 +218,15 @@ public class RegistrationFacade {
 	
 	public void closeConnection(){
 		m_dao.closeConnection();
+	}
+	//tillagt nu i kompletteringen
+	public void addMemberToList(Member a_member){
+		m_dao.addMemberToList(a_member);
+	}
+	public void removeAllMembersFromList(){
+		m_dao.removeAllMembersFromList();
+	}
+	public ArrayList<Member> getMembers(){
+		return m_dao.getMembers();
 	}
 }

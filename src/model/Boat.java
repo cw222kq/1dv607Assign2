@@ -3,18 +3,29 @@
  */
 package model;
 
+
 /**
  * @author cw222kq
  *
  */
-class Boat {
+public class Boat {
 
 	private int id;
 	private int size;
 	private String type;
 	private String imagePath;
-	
+
 	public Boat(){}
+	
+	//ctor tillagt nu i kompletteringen
+	public Boat(int id, int size, String type, String imagePath){
+		
+		this.id = id;
+		this.size = size;
+		this.type = type;
+		this.imagePath = imagePath;
+		
+	}
 	
 	// setters
 	public void setId(int valueId){

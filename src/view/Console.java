@@ -5,7 +5,12 @@ package view;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
+
+import model.Boat;
+import model.Member;
 
 /**
  * @author cw222kq
@@ -194,8 +199,9 @@ public class Console {
 	}
 	
 	// ******** RESULTSET METHODS GETTING THE DATA FROM THE DATABASE *********
+	// VIEW FÅR INTE VETA NÅGOT OM RESULTSET
 	// list member as compact list
-	public void printCompactList(ResultSet r){
+/*	public void printCompactList(ResultSet r){	RADERA
 		try {
 			while(r.next()){
 				System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
@@ -203,10 +209,21 @@ public class Console {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}*/
+	
+	//tillagt nu i kompletteringen
+	public void printCompactList(Iterable<model.Member> listOfMembers){
+		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+		while(listOfmembersIterator.hasNext()){
+			model.Member member = listOfmembersIterator.next();
+			System.out.println("Member name: " + member.getName() + ", Member id: " + member.getId() + ", Number of boats: " + member.getNumberOfBoats());
+		}
 	}
 	
+	//////////////////////////////////////////////////////////
+	
 	// used for list member as verbose list and view members information
-	public void printMembersInformation(ResultSet r){
+	public void printMembersInformation(ResultSet r){				//RADERAS !!!!!!!!!!!!!!!!
 		int currentMemberID = 0;
 		try {
 			while(r.next()){				
@@ -225,9 +242,27 @@ public class Console {
 			e.printStackTrace();
 		}		
 	}
+	
+	//tillagt nu i kompletteringen 
+	public void printMembersInformation(Iterable<model.Member> listOfMembers){
+		int currentMemberID = 0; // tillagt nu
+		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+		while(listOfmembersIterator.hasNext()){	
+			model.Member member = listOfmembersIterator.next();
+			if(member.getId() != currentMemberID){ // tillagt nu
+				System.out.println("\n" + "Member name: " + member.getName() + ", SSN: " + member.getSSN() + ", Member id: " + member.getId());
+				for(Object boat: member.getBoats()){
+					System.out.println("Boat id: " + ((Boat) boat).getId() + ", Boat size: " + ((Boat) boat).getSize() + ", Boat type: " + ((Boat) boat).getType() + ", Image path: " + ((Boat) boat).getImagePath());
+				}
+			}
+			currentMemberID = member.getId();	
+		}			
+	}
+	/////////////////////////////////////////////////////////////
+	
 
 	// prints all boats owned of a specific member
-	public void printMembersBoats(ResultSet r){
+	public void printMembersBoats(ResultSet r){		// RADERA
 		try {
 			while(r.next()){
 				System.out.println("Boat id: " + r.getInt("id") + ", Size: " + r.getInt("size") + ", Type: " + r.getString("type") + ", Image path: " + r.getString("path"));
@@ -237,8 +272,21 @@ public class Console {
 		}
 	}
 	
+	//tillagt nu i kompletteringen 
+	public void printMembersBoats(ArrayList listOfBoats){
+		Iterator<model.Boat> listOfBoatsIterator = listOfBoats.iterator();
+		while(listOfBoatsIterator.hasNext()){	
+			model.Boat boat = listOfBoatsIterator.next();
+			//for(Object boat: member.getBoats()){
+				System.out.println("Boat id: " + ((Boat) boat).getId() + ", Boat size: " + ((Boat) boat).getSize() + ", Boat type: " + ((Boat) boat).getType() + ", Image path: " + ((Boat) boat).getImagePath());
+			//}
+		}	
+	}
+	
+	//////////////////////////////
+	
 	// print all information about the member (i.e all the data in the member table)
-	public void printMember(ResultSet r){
+	public void printMember(ResultSet r){					//radera
 		if(r == null){System.out.println("null"); 
 			return;
 		}
@@ -251,13 +299,35 @@ public class Console {
 		}		
 	}
 	
-	public void printBoat(ResultSet r){
+	// tillagt i kompletteringen 
+	public void printMemberTest(ArrayList<model.Member> listOfMembers){	
+		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+		if(listOfMembers.isEmpty()){System.out.println("null"); 
+			return;
+		}
+		while(listOfmembersIterator.hasNext()){
+			model.Member member = listOfmembersIterator.next();
+			System.out.println("Member id: " + member.getId() + ", SSN: " + member.getSSN() + ", Member name: " + member.getName() + ", Member password: " + member.getPassword());
+		}
+				
+	}
+	
+	public void printBoat(ResultSet r){			//radera
 		try {
 			while(r.next()){
 				System.out.println("Boat id: " + r.getInt("id") + ", Boat size: " + r.getString("size") + ", Boat type: " + r.getString("type") + ", Image path: " + r.getString("path"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	// tillagt i kompletteringen 
+	public void printBoatTest(ArrayList<model.Boat> listOfBoats){
+		Iterator<model.Boat> listOfBoatsIterator = listOfBoats.iterator();
+		while(listOfBoatsIterator.hasNext()){
+				model.Boat boat = listOfBoatsIterator.next();
+				System.out.println("Boat id: " + boat.getId() + ", Boat size: " + boat.getSize() + ", Boat type: " + boat.getType() + ", Image path: " + boat.getImagePath());
 		}
 	}
 	
