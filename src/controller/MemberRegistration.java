@@ -10,7 +10,7 @@ import java.sql.SQLException; //FÅR EJ FINNAS I CONTROLLERN DETTA ANVÄNDS VID CO
  * @author cw222kq
  *
  */
-public class MemberRegistration { //i början
+public class MemberRegistration {
 
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 	// running the program as long as the user don't choose q in the menu
@@ -71,11 +71,11 @@ public class MemberRegistration { //i början
 				
 				// printing the current member information on the specific member from the db
 				a_view.printLookAtMember(a_registrationFacade);
-				if(a_registrationFacade.getMembersInformationTest() == null){	// stod innan if(a_registrationFacade.getMembersInformation() == null)
+				if(a_registrationFacade.getMembersInformation() == null){
 					a_view.printErrorUser();
 				}
 				else {
-					a_view.printMemberTest(a_registrationFacade.getMembersInformationTest());	//stod innan a_view.printMember(a_registrationFacade.getMembersInformation());
+					a_view.printMember(a_registrationFacade.getMembersInformation());
 				
 					// printing out the menu for changing the specific member and setting the new values
 					a_view.printChangeMember(a_registrationFacade);
@@ -99,7 +99,7 @@ public class MemberRegistration { //i början
 				// choose the specific member
 				a_view.printLookAtMember(a_registrationFacade);
 				
-				// printing out the specific members information NY		
+				// printing out the specific members information	
 				a_view.printMembersInformation(a_registrationFacade.getMemberAndBoatsInformation(a_registrationFacade.getMemberSSN()));
 				
 			}
@@ -143,8 +143,8 @@ public class MemberRegistration { //i början
 				// Choose the member that the user wants to delete a boat from
 				a_view.printChooseMember(a_registrationFacade);
 				
-				// printing out all the specific members boats	NY
-				a_view.printMembersBoats(a_registrationFacade.getMembersBoatsTest(a_registrationFacade.getMemberSSN())); 
+				// printing out all the specific members boats
+				a_view.printMembersBoats(a_registrationFacade.getMembersBoats(a_registrationFacade.getMemberSSN())); 
 				
 				// Choose the specific boat to delete from the member
 				a_view.printDeleteBoat(a_registrationFacade);
@@ -168,14 +168,12 @@ public class MemberRegistration { //i början
 				// Choose the member that the user wants to modify a boat from
 				a_view.printLookAtMember(a_registrationFacade);
 				
-				// printing out all boats from the specific member NY
-				a_view.printMembersBoats(a_registrationFacade.getMembersBoatsTest(a_registrationFacade.getMemberSSN())); 
+				// printing out all boats from the specific member
+				a_view.printMembersBoats(a_registrationFacade.getMembersBoats(a_registrationFacade.getMemberSSN())); 
 				
 				// Choose the specific boat to modify from the member
 				a_view.printSelectBoat(a_registrationFacade);
-				
-				// NY
-				a_view.printBoatTest(a_registrationFacade.getASpecificBoatTest(a_registrationFacade.getBoatId()));
+				a_view.printBoat(a_registrationFacade.getASpecificBoat(a_registrationFacade.getBoatId()));
 						
 				// printing out the menu for changing the specific boat and setting the new values
 				a_view.printChangeBoat(a_registrationFacade); 

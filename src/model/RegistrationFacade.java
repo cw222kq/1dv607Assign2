@@ -116,21 +116,34 @@ public class RegistrationFacade {
 		return m_dao.getMembersLatestAddedBoatId(memberId);
 	}
 	
-	//tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getCompactList() {
 		return m_dao.getCompactList();
 	}
 	
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getVerboseList() {
 		return m_dao.getVerboseList();
 	}
 	
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getMemberAndBoatsInformation(String SSN) {	
-		return m_dao.getMemberAndBoatsInformationTest(SSN);	
+		return m_dao.getMemberAndBoatsInformation(SSN);	
 	}
 	
-	public ArrayList<Object> getMembersInformationTest() {
-		return m_dao.getMembersInformationTest(m_member);
+	// changed by me referred to as 1 in the changes.txt
+	public ArrayList<Object> getMembersInformation() {
+		return m_dao.getMembersInformation(m_member);
+	}
+	
+	// changed by me referred to as 1 in the changes.txt
+	public ArrayList<Object> getMembersBoats(String SSN){
+		return m_dao.getMembersBoats(SSN);	
+	}
+	
+	// changed by me referred to as 1 in the changes.txt
+	public ArrayList<Object> getASpecificBoat(int id){
+		return m_dao.getASpecificBoat(id);
 	}
 	
 	public void deleteMember(String SSN){
@@ -139,14 +152,6 @@ public class RegistrationFacade {
 	
 	public void deleteBoat(int id){
 		m_dao.deleteBoat(id);	
-	}
-	
-	public ArrayList<Object> getMembersBoatsTest(String SSN){
-		return m_dao.getMembersBoatsTest(SSN);	
-	}
-	
-	public ArrayList<Object> getASpecificBoatTest(int id){
-		return m_dao.getASpecificBoatTest(id);
 	}
 	
 	public void updateMember(){

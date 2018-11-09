@@ -199,7 +199,7 @@ public class Console {
 	// ******** METHODS THAT GETS THE DATA FROM THE DATABASE *********
 	// VIEW FÅR INTE VETA NÅGOT OM RESULTSET
 	// list member as compact list
-	//tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public void printCompactList(ArrayList<Object> listOfMembers){
 		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		while(listOfmembersIterator.hasNext()){
@@ -209,7 +209,7 @@ public class Console {
 	}
 		
 	// used for list member as verbose list and view members information
-	//tillagt nu i kompletteringen 
+	// changed by me referred to as 1 in the changes.txt
 	public void printMembersInformation(ArrayList<Object> listOfMembers){
 		int currentMemberID = 0; // tillagt nu
 		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
@@ -226,7 +226,7 @@ public class Console {
 	}
 	
 	// prints all boats owned of a specific member
-	//tillagt nu i kompletteringen 
+	// changed by me referred to as 1 in the changes.txt
 	public void printMembersBoats(ArrayList<Object> listOfBoats){
 		Iterator<Object> listOfBoatsIterator = listOfBoats.iterator();
 		while(listOfBoatsIterator.hasNext()){	
@@ -236,8 +236,8 @@ public class Console {
 	}
 	
 	// print all information about the member (i.e all the data in the member table)
-	// tillagt i kompletteringen 
-	public void printMemberTest(ArrayList<Object> listOfMembers){	
+	// changed by me referred to as 1 in the changes.txt
+	public void printMember(ArrayList<Object> listOfMembers){	
 		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		if(listOfMembers.isEmpty()){System.out.println("null"); 
 			return;
@@ -249,8 +249,8 @@ public class Console {
 				
 	}
 	
-	// tillagt i kompletteringen 
-	public void printBoatTest(ArrayList<Object> listOfBoats){
+	// changed by me referred to as 1 in the changes.txt
+	public void printBoat(ArrayList<Object> listOfBoats){
 		Iterator<Object> listOfBoatsIterator = listOfBoats.iterator();
 		while(listOfBoatsIterator.hasNext()){
 				model.Boat boat = (Boat)listOfBoatsIterator.next();

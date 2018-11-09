@@ -38,18 +38,6 @@ public class Member {
 		
 		
 	}
-public Member(int id, String SSN, String name, String password, int numberOfBoats){
-		
-		this.id = id;
-		this.SSN = SSN;
-		this.name = name;
-		this.password = password;
-		this.numberOfBoats = numberOfBoats;		
-		
-		
-		
-	}
-//////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void addBoat(int id, int size, String type, String imagePath){
 		listOfBoats.add(new Boat(id, size, type, imagePath));

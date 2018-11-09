@@ -30,7 +30,7 @@ class DAO {
 		}
 		createTables();
 		
-		//tillagt nu i kompleteringen
+		// changed by me referred to as 1 in the changes.txt
 		listOfMembers = new ArrayList<Object>();
 		
 	}
@@ -42,7 +42,7 @@ class DAO {
 	private DB m_db = new DB();
 	private Member m_member = new Member();
 	
-	//tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	private ArrayList<Object> listOfMembers;
 				
 	//////////////////////////////////////
@@ -139,7 +139,7 @@ class DAO {
 	
 	// GETTING DATA FROM THE DB
 	// Get compact list (name, member id and number of boats of all members)
-	// tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getCompactList(){
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -151,8 +151,7 @@ class DAO {
 		}
 		try {
 			while(rs.next()){
-				//System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
-				listOfMembers.add(new Member(rs.getInt("member id"), null, rs.getString("member name"), null, rs.getInt("number of boats")));
+				listOfMembers.add(new Member(rs.getInt("member id"), null, rs.getString("member name"), null, rs.getInt("number of boats"), null));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,8 +159,8 @@ class DAO {
 		return listOfMembers;	
 	}
 	
-	// Get verbose list (name, SSN, member id and boats with boat information of all members)		RADERA
-	// tillagt nu i kompletteringen	
+	// Get verbose list (name, SSN, member id and boats with boat information of all members)
+	// changed by me referred to as 1 in the changes.txt	
 	public ArrayList<Object> getVerboseList() {
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -187,14 +186,9 @@ class DAO {
 		return listOfMembers;
 	}
 	
-	
-	/////////////////////////////////////////////////////
-	
-	// MÅSTE ÄNDRAS
-	
 	// Look at a specific members information 
-	// tillagt nu i kompletteringen			
-	public ArrayList<Object> getMemberAndBoatsInformationTest(String SSN) {	
+	// changed by me referred to as 1 in the changes.txt			
+	public ArrayList<Object> getMemberAndBoatsInformation(String SSN) {	
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		rs = null;
@@ -214,11 +208,10 @@ class DAO {
 		return listOfMembers;		
 	}
 	
-	
-	// Change membersInformation 					FORTSÄTT HÄR!!!!!*************
-	// Getting the members information from the ssn	TAR UT ALLT OM MEDLEMEN
-	// tillagt i kompletteringen 
-	public ArrayList<Object> getMembersInformationTest(model.Member a_member) {
+	// Change membersInformation
+	// Getting the members information from the ssn	
+	// changed by me referred to as 1 in the changes.txt
+	public ArrayList<Object> getMembersInformation(model.Member a_member) {
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		rs = null;
@@ -233,7 +226,6 @@ class DAO {
 		} 
 		try {
 			while(rs.next()){
-				//System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
 				listOfMembers.add(new Member(rs.getInt("member id"), rs.getString("social security number"), rs.getString("member name"), rs.getString("member password"), 0, null));
 			}
 		} catch (SQLException e) {
@@ -258,8 +250,8 @@ class DAO {
 		}	
 	}
 	
-	// tillagt i kompletteringen	
-	public ArrayList<Object> getMembersBoatsTest(String SSN){
+	// changed by me referred to as 1 in the changes.txt	
+	public ArrayList<Object> getMembersBoats(String SSN){
 		rs = null;
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -278,8 +270,8 @@ class DAO {
 		return m_member.getBoats();		
 	}
 	
-	// tillagt i kompletteringen
-	public ArrayList<Object> getASpecificBoatTest(int id){
+	// changed by me referred to as 1 in the changes.txt
+	public ArrayList<Object> getASpecificBoat(int id){
 		rs = null;
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -330,7 +322,7 @@ class DAO {
 	public void closeConnection(){
 		m_db.closeConnection();
 	}
-	//tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public void addMemberToList(Member a_member){
 		listOfMembers.add(a_member);
 	}
