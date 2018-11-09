@@ -10,7 +10,7 @@ import java.sql.SQLException; //FÅR EJ FINNAS I CONTROLLERN DETTA ANVÄNDS VID CO
  * @author cw222kq
  *
  */
-public class MemberRegistration {
+public class MemberRegistration { //i början
 
 	// written with inspiration from: https://github.com/tobias-dv-lnu/1dv607/blob/master/MV_DiceGame/MV_DiceGame_java/view/Console.java
 	// running the program as long as the user don't choose q in the menu
@@ -37,9 +37,6 @@ public class MemberRegistration {
 			}
 			// 2. List all members as compact list
 			else if(a_view.getInChar() == '2'){
-				
-				/*a_view.printHeadingCompactList();
-				a_view.printCompactList(a_registrationFacade.getCompactList());	*/
 				
 				a_view.printHeadingCompactList();
 				a_view.printCompactList(a_registrationFacade.getCompactList());	
@@ -102,10 +99,7 @@ public class MemberRegistration {
 				// choose the specific member
 				a_view.printLookAtMember(a_registrationFacade);
 				
-				// printing out the specific members information GAMMAL
-				//a_view.printMembersInformation(a_registrationFacade.getMemberAndBoatsInformation(a_registrationFacade.getMemberSSN()));
-				
-				// printing out the specific members information NY		JOBBA HÄR!!!!!!!!!!!!!!!
+				// printing out the specific members information NY		
 				a_view.printMembersInformation(a_registrationFacade.getMemberAndBoatsInformation(a_registrationFacade.getMemberSSN()));
 				
 			}
@@ -149,9 +143,6 @@ public class MemberRegistration {
 				// Choose the member that the user wants to delete a boat from
 				a_view.printChooseMember(a_registrationFacade);
 				
-				// printing out all the specific members boats	GAMMAL
-				//a_view.printMembersBoats(a_registrationFacade.getMembersBoats(a_registrationFacade.getMemberSSN()));
-				
 				// printing out all the specific members boats	NY
 				a_view.printMembersBoats(a_registrationFacade.getMembersBoatsTest(a_registrationFacade.getMemberSSN())); 
 				
@@ -177,17 +168,11 @@ public class MemberRegistration {
 				// Choose the member that the user wants to modify a boat from
 				a_view.printLookAtMember(a_registrationFacade);
 				
-				// printing out all boats from the specific member GAMMAL
-				//a_view.printMembersBoats(a_registrationFacade.getMembersBoats(a_registrationFacade.getMemberSSN()));
-				
 				// printing out all boats from the specific member NY
 				a_view.printMembersBoats(a_registrationFacade.getMembersBoatsTest(a_registrationFacade.getMemberSSN())); 
 				
 				// Choose the specific boat to modify from the member
 				a_view.printSelectBoat(a_registrationFacade);
-				
-				// GAMMAL
-				//a_view.printBoat(a_registrationFacade.getASpecificBoat(a_registrationFacade.getBoatId()));
 				
 				// NY
 				a_view.printBoatTest(a_registrationFacade.getASpecificBoatTest(a_registrationFacade.getBoatId()));

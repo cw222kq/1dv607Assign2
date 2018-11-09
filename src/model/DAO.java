@@ -139,19 +139,10 @@ class DAO {
 	
 	// GETTING DATA FROM THE DB
 	// Get compact list (name, member id and number of boats of all members)
-/*	public ResultSet getCompactList() {
-		rs = null;		
-		try {
-			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.id AS 'member id', COUNT(Boat.member_id) AS 'number of boats' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) GROUP BY Boat.member_id");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;	
-	}*/
-	
 	// tillagt nu i kompletteringen
 	public ArrayList<Member> getCompactList(){
 		listOfMembers.clear();
+		m_member.getBoats().clear();
 		rs = null;		
 		try {
 			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.id AS 'member id', COUNT(Boat.member_id) AS 'number of boats' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) GROUP BY Boat.member_id");
@@ -168,19 +159,8 @@ class DAO {
 		}
 		return listOfMembers;	
 	}
-	///////////////////////////////////////////////////////
 	
 	// Get verbose list (name, SSN, member id and boats with boat information of all members)		RADERA
-	/*public ResultSet getVerboseList() {
-		rs = null;
-		try {
-			rs = statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id)");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;
-	}*/
-	
 	// tillagt nu i kompletteringen	
 	public ArrayList getVerboseList() {
 		listOfMembers.clear();
@@ -213,16 +193,6 @@ class DAO {
 	// MÅSTE ÄNDRAS
 	
 	// Look at a specific members information 
-	public ResultSet getMemberAndBoatsInformation(String SSN) {		//Radera
-		rs = null;
-		try {
-			rs =statement.executeQuery("SELECT Member.name AS 'member name', Member.ssn AS 'social security number', Member.id AS 'member id', Member.password AS 'member password', Boat.id AS 'boat id', Boat.size AS 'boat size', Boat.type AS 'boat type', Image.path AS 'image path' FROM Member LEFT JOIN Boat ON (Member.id = Boat.member_id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN = " + "'" + SSN + "'" );
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;		
-	}
-	
 	// tillagt nu i kompletteringen			
 	public ArrayList getMemberAndBoatsInformationTest(String SSN) {	
 		listOfMembers.clear();
@@ -249,6 +219,7 @@ class DAO {
 	// Getting the members information from the ssn	TAR UT ALLT OM MEDLEMEN
 	public ResultSet getMembersInformation(model.Member a_member) {
 		listOfMembers.clear();
+		m_member.getBoats().clear();
 		rs = null;
 		try {
 			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + a_member.getSSN()+ "'" );  
@@ -273,6 +244,7 @@ class DAO {
 	// tillagt i kompletteringen 
 	public ArrayList getMembersInformationTest(model.Member a_member) {
 		listOfMembers.clear();
+		m_member.getBoats().clear();
 		rs = null;
 		try {
 			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + a_member.getSSN()+ "'" );  
@@ -293,7 +265,6 @@ class DAO {
 		}
 		return listOfMembers;
 	}
-	////////////////////////////////////////////////////////////
 	
 	public void deleteMember(String SSN){
 		try {
@@ -310,20 +281,12 @@ class DAO {
 			e.printStackTrace();
 		}	
 	}
-	// MÅSTE ÄNDRAS
-	public ResultSet getMembersBoats(String SSN){
-		rs = null;
-		try {
-			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN =" + "'" + SSN + "'"); 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;		
-	}
 	
 	// tillagt i kompletteringen	
 	public ArrayList getMembersBoatsTest(String SSN){
 		rs = null;
+		listOfMembers.clear();
+		m_member.getBoats().clear();
 		try {
 			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.SSN =" + "'" + SSN + "'"); 
 		} catch (SQLException e) {
@@ -339,19 +302,11 @@ class DAO {
 		return m_member.getBoats();		
 	}
 	
-	public ResultSet getASpecificBoat(int id){	//RADERA
-		rs = null;
-		try {
-			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.id =" + id);  
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;	
-	}
-	
 	// tillagt i kompletteringen
 	public ArrayList getASpecificBoatTest(int id){
 		rs = null;
+		listOfMembers.clear();
+		m_member.getBoats().clear();
 		try {
 			rs = statement.executeQuery("SELECT Boat.id, Boat.size, Boat.type, Image.path FROM Boat LEFT JOIN Member ON (Boat.member_id = Member.id) LEFT JOIN Image ON (Boat.id = Image.boat_id) WHERE Member.id =" + id);  
 		} catch (SQLException e) {
