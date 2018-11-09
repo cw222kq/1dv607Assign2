@@ -3,14 +3,11 @@
  */
 package view;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-
 import model.Boat;
-import model.Member;
+
 
 /**
  * @author cw222kq

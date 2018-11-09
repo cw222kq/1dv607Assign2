@@ -3,7 +3,6 @@
  */
 package model;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -24,14 +23,6 @@ public class RegistrationFacade {
 		m_dao = new DAO();
 	}
 	// MEMBER METHODS	
-	/*public Object getMember(){
-		return this.m_member;
-	}
-	//tillagt nu i kompletteringen 
-	public void addBoat(int id, int size, String type, String imagePath){
-		m_member.addBoat(id, size, type, imagePath);
-	}*/
-	//////////////////////////////////////
 	// setters
 	public void setMemberId(int valueId){
 		m_member.setId(valueId);
@@ -134,7 +125,7 @@ public class RegistrationFacade {
 		return m_dao.getVerboseList();
 	}
 	
-	public ArrayList getMemberAndBoatsInformation(String SSN) {	//Ändrad från resultset till arraylist i returntyp
+	public ArrayList getMemberAndBoatsInformation(String SSN) {	
 		return m_dao.getMemberAndBoatsInformationTest(SSN);	
 	}
 	
@@ -181,14 +172,4 @@ public class RegistrationFacade {
 	public void closeConnection(){
 		m_dao.closeConnection();
 	}
-	//tillagt nu i kompletteringen
-	/*public void addMemberToList(Member a_member){
-		m_dao.addMemberToList(a_member);
-	}
-	public void removeAllMembersFromList(){
-		m_dao.removeAllMembersFromList();
-	}
-	public ArrayList<Member> getMembers(){
-		return m_dao.getMembers();
-	}*/
 }

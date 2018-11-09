@@ -217,30 +217,6 @@ class DAO {
 	
 	// Change membersInformation 					FORTSÄTT HÄR!!!!!*************
 	// Getting the members information from the ssn	TAR UT ALLT OM MEDLEMEN
-	public ResultSet getMembersInformation(model.Member a_member) {
-		listOfMembers.clear();
-		m_member.getBoats().clear();
-		rs = null;
-		try {
-			rs = statement.executeQuery("SELECT Member.id AS 'member id', Member.ssn AS 'social security number', Member.name AS 'member name', Member.password AS 'member password' FROM Member WHERE Member.SSN = " + "'" + a_member.getSSN()+ "'" );  
-			if(rs.isClosed()){
-				return null;
-			}
-			a_member.setId(rs.getInt("member id"));
-		} catch (SQLException e) {
-			e.printStackTrace(); 
-		} 
-		try {
-			while(rs.next()){
-				//System.out.println("Member name: " + r.getString("member name") + ", Member id: " + r.getInt("member id") + ", Number of boats: " + r.getInt("number of boats"));
-				listOfMembers.add(new Member(rs.getInt("member id"), rs.getString("social security number"), rs.getString("member name"), rs.getString("password"), rs.getInt("number of boats")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	
 	// tillagt i kompletteringen 
 	public ArrayList getMembersInformationTest(model.Member a_member) {
 		listOfMembers.clear();
