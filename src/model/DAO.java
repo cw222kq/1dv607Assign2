@@ -44,9 +44,7 @@ class DAO {
 	
 	// changed by me referred to as 1 in the changes.txt
 	private ArrayList<Object> listOfMembers;
-				
-	//////////////////////////////////////
-	
+					
 	// INPUT VALUES INTO THE TABLES
 	public void insertMember(model.Member a_member){
 		if(a_member.getName() == null){return;}
@@ -311,25 +309,36 @@ class DAO {
 		m_db.startTransaction();
 	}
 	
-	public void commitTransaction() throws SQLException{
+	public void commitTransaction(){
 		m_db.commitTransaction();
-	}
-	
-	public void rollback(){
-		m_db.rollback();
 	}
 	
 	public void closeConnection(){
 		m_db.closeConnection();
 	}
+	
 	// changed by me referred to as 1 in the changes.txt
 	public void addMemberToList(Member a_member){
 		listOfMembers.add(a_member);
 	}
+	
+	// changed by me referred to as 1 in the changes.txt
 	public void removeAllMembersFromList(){
 		listOfMembers.clear();
 	}
+	
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getMembers(){
 		return listOfMembers;
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public void setEventSucceededToFalse(){
+		m_db.setEventSucceededToFalse();
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public boolean getEventSucceeded(){
+		return m_db.getEventSucceeded();	
 	}
 }

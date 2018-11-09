@@ -17,6 +17,9 @@ public class DB {
 	Connection connection;
 	Statement statement;
 	
+	// changed by me referred to as 4 in the changes.txt
+	private boolean eventSucceeded = false;
+	
 	public DB() {
 		this.connection = null;
 	}
@@ -66,17 +69,24 @@ public class DB {
 		}	
 	}
 	
-	public void commitTransaction() throws SQLException{
-		this.connection.commit();
+	public void commitTransaction(){
+		try {
+			this.connection.commit();
+			eventSucceeded = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback();
+		}
 	}
 	
-	public void rollback(){
+	private void rollback(){
 		try {
 			this.connection.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	// Closes the result set and the connection. Executed when user wants to quit the application
 	public void closeConnection(){
 		try {
@@ -84,6 +94,16 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public void setEventSucceededToFalse(){
+		eventSucceeded = false;
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public boolean getEventSucceeded(){
+		return this.eventSucceeded;	
 	}
 
 }

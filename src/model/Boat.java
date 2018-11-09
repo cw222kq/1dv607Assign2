@@ -17,7 +17,7 @@ public class Boat {
 
 	public Boat(){}
 	
-	//ctor tillagt nu i kompletteringen
+	// changed by me referred to as 2 in the changes.txt
 	public Boat(int id, int size, String type, String imagePath){
 		
 		this.id = id;

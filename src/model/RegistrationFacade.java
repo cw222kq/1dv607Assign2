@@ -3,7 +3,6 @@
  */
 package model;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -166,15 +165,21 @@ public class RegistrationFacade {
 		m_dao.startTransaction();
 	}
 	
-	public void commitTransaction() throws SQLException{
+	public void commitTransaction(){
 		m_dao.commitTransaction();
-	}
-	
-	public void rollback(){
-		m_dao.rollback();
 	}
 	
 	public void closeConnection(){
 		m_dao.closeConnection();
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public void setEventSucceededToFalse(){
+		m_dao.setEventSucceededToFalse();
+	}
+	
+	// changed by me referred to as 4 in the changes.txt
+	public boolean getEventSucceeded(){
+		return m_dao.getEventSucceeded();	
 	}
 }

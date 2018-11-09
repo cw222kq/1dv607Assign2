@@ -17,15 +17,15 @@ public class Member {
 	private String password;
 	private int numberOfBoats;
 	
-	//tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	private ArrayList<Object> listOfBoats = new ArrayList<Object>();
 		
 	public Member(){
 		
-		//tillagt nu i kompletteringen
+		// changed by me referred to as 1 in the changes.txt
 		listOfBoats = new ArrayList<Object>();
 	}
-	//ctor tillagt nu i kompletteringen
+	// changed by me referred to as 2 in the changes.txt
 	public Member(int id, String SSN, String name, String password, int numberOfBoats, ArrayList<Object> arr){
 		
 		this.id = id;
@@ -38,15 +38,16 @@ public class Member {
 		
 		
 	}
-
+	
+	// changed by me referred to as 1 in the changes.txt
 	public void addBoat(int id, int size, String type, String imagePath){
 		listOfBoats.add(new Boat(id, size, type, imagePath));
 	}
+	// changed by me referred to as 1 in the changes.txt
 	public ArrayList<Object> getBoats(){
 		return listOfBoats;
 	}
 	
-	///////////////////////////////////////
 	// setters
 	public void setId(int valueId){
 		this.id = valueId;
@@ -64,7 +65,7 @@ public class Member {
 		this.password = valuePassword;
 	}
 	
-	// tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public void setNumberOfBoats(int valueNumberOfBoats){
 		this.numberOfBoats = valueNumberOfBoats;
 	}
@@ -86,7 +87,7 @@ public class Member {
 		return this.password;
 	}
 	
-	// tillagt nu i kompletteringen
+	// changed by me referred to as 1 in the changes.txt
 	public int getNumberOfBoats(){
 		return this.numberOfBoats;
 	}

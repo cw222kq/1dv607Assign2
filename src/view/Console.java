@@ -197,7 +197,6 @@ public class Console {
 	}
 	
 	// ******** METHODS THAT GETS THE DATA FROM THE DATABASE *********
-	// VIEW FÅR INTE VETA NÅGOT OM RESULTSET
 	// list member as compact list
 	// changed by me referred to as 1 in the changes.txt
 	public void printCompactList(ArrayList<Object> listOfMembers){
@@ -211,11 +210,11 @@ public class Console {
 	// used for list member as verbose list and view members information
 	// changed by me referred to as 1 in the changes.txt
 	public void printMembersInformation(ArrayList<Object> listOfMembers){
-		int currentMemberID = 0; // tillagt nu
+		int currentMemberID = 0; 
 		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		while(listOfmembersIterator.hasNext()){	
 			model.Member member = (Member)listOfmembersIterator.next();
-			if(member.getId() != currentMemberID){ // tillagt nu
+			if(member.getId() != currentMemberID){ 
 				System.out.println("\n" + "Member name: " + member.getName() + ", SSN: " + member.getSSN() + ", Member id: " + member.getId());
 				for(Object boat: member.getBoats()){
 					System.out.println("Boat id: " + ((Boat) boat).getId() + ", Boat size: " + ((Boat) boat).getSize() + ", Boat type: " + ((Boat) boat).getType() + ", Image path: " + ((Boat) boat).getImagePath());

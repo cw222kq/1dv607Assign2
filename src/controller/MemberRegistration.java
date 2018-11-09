@@ -3,9 +3,6 @@
  */
 package controller;
 
-import java.sql.SQLException; //FÅR EJ FINNAS I CONTROLLERN DETTA ANVÄNDS VID COMMITEN ANVÄND KANSKE EN 
-//BOOLEAN ISTÄLLET
-
 /**
  * @author cw222kq
  *
@@ -27,13 +24,11 @@ public class MemberRegistration {
 				// Inserting the member in the member table in the db
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.insertMember();
-				try {
-					a_registrationFacade.commitTransaction();
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
 					a_view.printSuccededInsert();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					a_registrationFacade.rollback();
-				}	
+					a_registrationFacade.setEventSucceededToFalse();
+				}
 			}
 			// 2. List all members as compact list
 			else if(a_view.getInChar() == '2'){
@@ -56,13 +51,12 @@ public class MemberRegistration {
 				// Deleting the member in the db
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.deleteMember(a_registrationFacade.getMemberSSN());
-				try {
-					a_registrationFacade.commitTransaction();
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
 					a_view.printSuccededDelete();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					a_registrationFacade.rollback();
+					a_registrationFacade.setEventSucceededToFalse();
 				}
+				
 			}
 			// 5. Change members information 
 			else if(a_view.getInChar() == '5'){
@@ -83,13 +77,12 @@ public class MemberRegistration {
 					// updating the information about the member in the db 
 					a_registrationFacade.startTransaction();
 					a_registrationFacade.updateMember();
-					try {
-						a_registrationFacade.commitTransaction();
+					a_registrationFacade.commitTransaction();
+					if(a_registrationFacade.getEventSucceeded()){
 						a_view.printSuccededInsert();
-					} catch (SQLException e) {
-						e.printStackTrace();
-						a_registrationFacade.rollback();
+						a_registrationFacade.setEventSucceededToFalse();
 					}
+							
 				}
 			}
 			// 6. View members information			
@@ -114,26 +107,24 @@ public class MemberRegistration {
 				// inserting the data into the boat table 
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.insertBoat();
-				try {
-					a_registrationFacade.commitTransaction();
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
 					a_view.printSuccededInsert();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-					a_registrationFacade.rollback();
+					a_registrationFacade.setEventSucceededToFalse();
 				}
+				
 				// getting the boat id of the latest boat that the member has added (for setting the boat_id into the image table)
 				a_registrationFacade.setBoatId(a_registrationFacade.getMembersLatestAddedBoatId(a_registrationFacade.getMemberId()));
 				
 				//inserting the data into the image table 
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.insertImage();
-				try {
-					a_registrationFacade.commitTransaction();
-					a_view.printSuccededInsert();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					a_registrationFacade.rollback();
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
+					a_view.printSuccededInsert(); 
+					a_registrationFacade.setEventSucceededToFalse();
 				}
+		
 			}
 			// 8. Delete a boat
 			else if(a_view.getInChar() == '8'){
@@ -152,13 +143,11 @@ public class MemberRegistration {
 				// Deleting the boat in the db 
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.deleteBoat(a_registrationFacade.getBoatId());
-				try {
-					a_registrationFacade.commitTransaction();
-					a_view.printSuccededDelete();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					a_registrationFacade.rollback();
-				}	
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
+					a_view.printSuccededDelete(); 
+					a_registrationFacade.setEventSucceededToFalse();
+				}		
 			}
 			// 9. Change boats information 
 			else if(a_view.getInChar() == '9'){
@@ -181,13 +170,11 @@ public class MemberRegistration {
 				// updating the information about the boat in the db 
 				a_registrationFacade.startTransaction();
 				a_registrationFacade.updateBoat();
-				try {
-					a_registrationFacade.commitTransaction();
+				a_registrationFacade.commitTransaction();
+				if(a_registrationFacade.getEventSucceeded()){
 					a_view.printSuccededInsert();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					a_registrationFacade.rollback();
-				}			
+					a_registrationFacade.setEventSucceededToFalse();	
+				}		
 			}
 			// If the user inputs a value that don't exists
 			else {a_view.printErrorChoice();}
