@@ -31,7 +31,7 @@ class DAO {
 		createTables();
 		
 		//tillagt nu i kompleteringen
-		listOfMembers = new ArrayList();
+		listOfMembers = new ArrayList<Object>();
 		
 	}
 	
@@ -43,7 +43,7 @@ class DAO {
 	private Member m_member = new Member();
 	
 	//tillagt nu i kompletteringen
-	private ArrayList listOfMembers;
+	private ArrayList<Object> listOfMembers;
 				
 	//////////////////////////////////////
 	
@@ -140,7 +140,7 @@ class DAO {
 	// GETTING DATA FROM THE DB
 	// Get compact list (name, member id and number of boats of all members)
 	// tillagt nu i kompletteringen
-	public ArrayList<Member> getCompactList(){
+	public ArrayList<Object> getCompactList(){
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		rs = null;		
@@ -162,7 +162,7 @@ class DAO {
 	
 	// Get verbose list (name, SSN, member id and boats with boat information of all members)		RADERA
 	// tillagt nu i kompletteringen	
-	public ArrayList getVerboseList() {
+	public ArrayList<Object> getVerboseList() {
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		int currentMemberID = 0;
@@ -194,7 +194,7 @@ class DAO {
 	
 	// Look at a specific members information 
 	// tillagt nu i kompletteringen			
-	public ArrayList getMemberAndBoatsInformationTest(String SSN) {	
+	public ArrayList<Object> getMemberAndBoatsInformationTest(String SSN) {	
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		rs = null;
@@ -218,7 +218,7 @@ class DAO {
 	// Change membersInformation 					FORTSÄTT HÄR!!!!!*************
 	// Getting the members information from the ssn	TAR UT ALLT OM MEDLEMEN
 	// tillagt i kompletteringen 
-	public ArrayList getMembersInformationTest(model.Member a_member) {
+	public ArrayList<Object> getMembersInformationTest(model.Member a_member) {
 		listOfMembers.clear();
 		m_member.getBoats().clear();
 		rs = null;
@@ -259,7 +259,7 @@ class DAO {
 	}
 	
 	// tillagt i kompletteringen	
-	public ArrayList getMembersBoatsTest(String SSN){
+	public ArrayList<Object> getMembersBoatsTest(String SSN){
 		rs = null;
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -279,7 +279,7 @@ class DAO {
 	}
 	
 	// tillagt i kompletteringen
-	public ArrayList getASpecificBoatTest(int id){
+	public ArrayList<Object> getASpecificBoatTest(int id){
 		rs = null;
 		listOfMembers.clear();
 		m_member.getBoats().clear();
@@ -297,8 +297,6 @@ class DAO {
 		}
 		return m_member.getBoats();	
 	}
-	
-	////////////////////////////////////////////////
 	
 	public void updateMember(model.Member a_member){
 		try {
@@ -339,7 +337,7 @@ class DAO {
 	public void removeAllMembersFromList(){
 		listOfMembers.clear();
 	}
-	public ArrayList<Member> getMembers(){
+	public ArrayList<Object> getMembers(){
 		return listOfMembers;
 	}
 }

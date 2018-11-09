@@ -18,15 +18,15 @@ public class Member {
 	private int numberOfBoats;
 	
 	//tillagt nu i kompletteringen
-	private ArrayList listOfBoats = new ArrayList<Boat>();
+	private ArrayList<Object> listOfBoats = new ArrayList<Object>();
 		
 	public Member(){
 		
 		//tillagt nu i kompletteringen
-		listOfBoats = new ArrayList();
+		listOfBoats = new ArrayList<Object>();
 	}
 	//ctor tillagt nu i kompletteringen
-	public Member(int id, String SSN, String name, String password, int numberOfBoats, ArrayList arr){
+	public Member(int id, String SSN, String name, String password, int numberOfBoats, ArrayList<Object> arr){
 		
 		this.id = id;
 		this.SSN = SSN;

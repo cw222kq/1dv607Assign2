@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import model.Boat;
+import model.Member;
 
 
 /**
  * @author cw222kq
  *
  */
-public class Console {	//i början
+public class Console {	
 	
 	public Console(){printWelcome();}
 	
@@ -199,21 +200,21 @@ public class Console {	//i början
 	// VIEW FÅR INTE VETA NÅGOT OM RESULTSET
 	// list member as compact list
 	//tillagt nu i kompletteringen
-	public void printCompactList(Iterable<model.Member> listOfMembers){
-		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+	public void printCompactList(ArrayList<Object> listOfMembers){
+		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		while(listOfmembersIterator.hasNext()){
-			model.Member member = listOfmembersIterator.next();
+			model.Member member = (Member)listOfmembersIterator.next();
 			System.out.println("Member name: " + member.getName() + ", Member id: " + member.getId() + ", Number of boats: " + member.getNumberOfBoats());
 		}
 	}
 		
 	// used for list member as verbose list and view members information
 	//tillagt nu i kompletteringen 
-	public void printMembersInformation(Iterable<model.Member> listOfMembers){
+	public void printMembersInformation(ArrayList<Object> listOfMembers){
 		int currentMemberID = 0; // tillagt nu
-		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		while(listOfmembersIterator.hasNext()){	
-			model.Member member = listOfmembersIterator.next();
+			model.Member member = (Member)listOfmembersIterator.next();
 			if(member.getId() != currentMemberID){ // tillagt nu
 				System.out.println("\n" + "Member name: " + member.getName() + ", SSN: " + member.getSSN() + ", Member id: " + member.getId());
 				for(Object boat: member.getBoats()){
@@ -226,33 +227,33 @@ public class Console {	//i början
 	
 	// prints all boats owned of a specific member
 	//tillagt nu i kompletteringen 
-	public void printMembersBoats(ArrayList listOfBoats){
-		Iterator<model.Boat> listOfBoatsIterator = listOfBoats.iterator();
+	public void printMembersBoats(ArrayList<Object> listOfBoats){
+		Iterator<Object> listOfBoatsIterator = listOfBoats.iterator();
 		while(listOfBoatsIterator.hasNext()){	
-			model.Boat boat = listOfBoatsIterator.next();
+			model.Boat boat = (Boat)listOfBoatsIterator.next();
 			System.out.println("Boat id: " + ((Boat) boat).getId() + ", Boat size: " + ((Boat) boat).getSize() + ", Boat type: " + ((Boat) boat).getType() + ", Image path: " + ((Boat) boat).getImagePath());		
 		}	
 	}
 	
 	// print all information about the member (i.e all the data in the member table)
 	// tillagt i kompletteringen 
-	public void printMemberTest(ArrayList<model.Member> listOfMembers){	
-		Iterator<model.Member> listOfmembersIterator = listOfMembers.iterator();
+	public void printMemberTest(ArrayList<Object> listOfMembers){	
+		Iterator<Object> listOfmembersIterator = listOfMembers.iterator();
 		if(listOfMembers.isEmpty()){System.out.println("null"); 
 			return;
 		}
 		while(listOfmembersIterator.hasNext()){
-			model.Member member = listOfmembersIterator.next();
+			model.Member member = (Member)listOfmembersIterator.next();
 			System.out.println("Member id: " + member.getId() + ", SSN: " + member.getSSN() + ", Member name: " + member.getName() + ", Member password: " + member.getPassword());
 		}
 				
 	}
 	
 	// tillagt i kompletteringen 
-	public void printBoatTest(ArrayList<model.Boat> listOfBoats){
-		Iterator<model.Boat> listOfBoatsIterator = listOfBoats.iterator();
+	public void printBoatTest(ArrayList<Object> listOfBoats){
+		Iterator<Object> listOfBoatsIterator = listOfBoats.iterator();
 		while(listOfBoatsIterator.hasNext()){
-				model.Boat boat = listOfBoatsIterator.next();
+				model.Boat boat = (Boat)listOfBoatsIterator.next();
 				System.out.println("Boat id: " + boat.getId() + ", Boat size: " + boat.getSize() + ", Boat type: " + boat.getType() + ", Image path: " + boat.getImagePath());
 		}
 	}

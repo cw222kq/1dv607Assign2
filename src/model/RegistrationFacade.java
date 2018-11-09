@@ -117,19 +117,19 @@ public class RegistrationFacade {
 	}
 	
 	//tillagt nu i kompletteringen
-	public ArrayList<Member> getCompactList() {
+	public ArrayList<Object> getCompactList() {
 		return m_dao.getCompactList();
 	}
 	
-	public ArrayList getVerboseList() {
+	public ArrayList<Object> getVerboseList() {
 		return m_dao.getVerboseList();
 	}
 	
-	public ArrayList getMemberAndBoatsInformation(String SSN) {	
+	public ArrayList<Object> getMemberAndBoatsInformation(String SSN) {	
 		return m_dao.getMemberAndBoatsInformationTest(SSN);	
 	}
 	
-	public ArrayList getMembersInformationTest() {
+	public ArrayList<Object> getMembersInformationTest() {
 		return m_dao.getMembersInformationTest(m_member);
 	}
 	
@@ -141,11 +141,11 @@ public class RegistrationFacade {
 		m_dao.deleteBoat(id);	
 	}
 	
-	public ArrayList getMembersBoatsTest(String SSN){
+	public ArrayList<Object> getMembersBoatsTest(String SSN){
 		return m_dao.getMembersBoatsTest(SSN);	
 	}
 	
-	public ArrayList getASpecificBoatTest(int id){
+	public ArrayList<Object> getASpecificBoatTest(int id){
 		return m_dao.getASpecificBoatTest(id);
 	}
 	
