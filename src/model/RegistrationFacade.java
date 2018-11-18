@@ -57,9 +57,6 @@ public class RegistrationFacade {
 	}
 	
 	// BOAT METHODS
-	public Boat getBoat(){
-		return m_boat;
-	}
 	// setters
 	public void setBoatId(int valueId){
 		m_boat.setId(valueId);
